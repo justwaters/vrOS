@@ -14,6 +14,7 @@
 		C3FF7AFA8C956654F57268E9 /* VideoDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2287DDC26399E2796820D35 /* VideoDecoder.swift */; };
 		D79E611D41DBE4E9C7DD69EE /* USBPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E1A8EB59436992EEF34DA7 /* USBPacket.swift */; };
 		F4A5A2AC01FFC4676E408795 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 31BE30C360EB1E453552CB5F /* Shaders.metal */; };
+		B1A2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		C2287DDC26399E2796820D35 /* VideoDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDecoder.swift; sourceTree = "<group>"; };
 		C9641C8D2700B0E524B2B05F /* USBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBClient.swift; sourceTree = "<group>"; };
 		EF7B83FACABA683AD1A85C27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 		8AAF3D06C0BFE19A9E13387F /* vrOSReceiver */ = {
 			isa = PBXGroup;
 			children = (
+				A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets */,
 				6058DC861B44C94E672E1239 /* App.swift */,
 				EF7B83FACABA683AD1A85C27 /* ContentView.swift */,
 				BE86E423CE7AF90E03EACCD4 /* Decoder */,
@@ -158,6 +161,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1A2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
