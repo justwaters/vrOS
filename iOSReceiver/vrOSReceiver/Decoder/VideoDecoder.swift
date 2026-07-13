@@ -10,8 +10,9 @@ final class VideoDecoder: @unchecked Sendable {
     struct Configuration: Sendable {
         let width: Int
         let height: Int
+        let frameRate: Int
 
-        static let default1080p = Configuration(width: 1920, height: 1080)
+        static let default1080p = Configuration(width: 1920, height: 1080, frameRate: 30)
     }
 
     struct DecodedFrame: Sendable {
@@ -317,7 +318,7 @@ final class VideoDecoder: @unchecked Sendable {
         guard status == noErr, let buffer = blockBuffer else { return nil }
 
         var timingInfo = CMSampleTimingInfo(
-            duration: CMTime(value: 1, timescale: 60),
+            duration: CMTime(value: 1, timescale: Int32(configuration.frameRate)),
             presentationTimeStamp: CMTime(value: Int64(timestamp), timescale: 1_000_000_000),
             decodeTimeStamp: .invalid
         )

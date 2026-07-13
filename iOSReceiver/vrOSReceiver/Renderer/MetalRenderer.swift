@@ -23,16 +23,18 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
         var distortionK1: Float
         var distortionK2: Float
         var eyeSeparation: Float
-        var padding: SIMD3<Float>
+        var caRed: Float
+        var caBlue: Float
     }
 
     private var uniforms = Uniforms(
         viewportSize: SIMD2<Float>(0, 0),
         textureSize: SIMD2<Float>(1920, 1080),
-        distortionK1: 0.12,
-        distortionK2: 0.08,
+        distortionK1: 0.03,
+        distortionK2: 0.02,
         eyeSeparation: 0.85,
-        padding: SIMD3<Float>(0, 0, 0)
+        caRed: -0.002,
+        caBlue: 0.002
     )
 
     override init() {

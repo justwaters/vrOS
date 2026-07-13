@@ -15,13 +15,13 @@ actor VideoEncoder {
         public let profileLevel: String
         public let keyFrameInterval: Int
 
-        public static let default1080p60 = Configuration(
+        public static let default1080p30 = Configuration(
             width: 1920,
             height: 1080,
-            frameRate: 60,
-            bitRate: 20_000_000,
+            frameRate: 30,
+            bitRate: 15_000_000,
             profileLevel: kVTProfileLevel_H264_Baseline_AutoLevel as String,
-            keyFrameInterval: 60
+            keyFrameInterval: 30
         )
     }
 

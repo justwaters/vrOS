@@ -13,6 +13,7 @@ final class StreamController: NSObject, SCStreamOutput, @unchecked Sendable {
     private let usbClient: USBClient
     private let captureQueue = DispatchQueue(label: "com.vros.capture", qos: .userInteractive)
     private let encodingQueue = DispatchQueue(label: "com.vros.encoding", qos: .userInteractive)
+    private let frameRate: Int
     private var isStreaming = false
     private var frameCount: Int64 = 0
     private var lastFrameTime: CMTime = .zero
@@ -34,6 +35,7 @@ final class StreamController: NSObject, SCStreamOutput, @unchecked Sendable {
         self.stream = SCStream(filter: contentFilter, configuration: streamConfig, delegate: nil)
         self.encoder = VideoEncoder(configuration: configuration.encoderConfiguration)
         self.usbClient = USBClient(port: configuration.usbPort)
+        self.frameRate = configuration.frameRate
 
         super.init()
 
@@ -130,7 +132,7 @@ final class StreamController: NSObject, SCStreamOutput, @unchecked Sendable {
 
         if lastFrameTime.value > 0 {
             let diff = presentationTime - lastFrameTime
-            if diff.value > 0 && diff.value < Int64(1_000_000_000 / 60) {
+            if diff.value > 0 && diff.value < Int64(1_000_000_000 / frameRate) {
                 return
             }
         }
@@ -185,11 +187,11 @@ struct StreamConfiguration: Sendable {
         )
     }
 
-    static let default1080p60 = StreamConfiguration(
+    static let default1080p30 = StreamConfiguration(
         width: 1920,
         height: 1080,
-        frameRate: 60,
-        bitRate: 20_000_000,
+        frameRate: 30,
+        bitRate: 15_000_000,
         usbPort: 2345
     )
 

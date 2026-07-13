@@ -102,7 +102,7 @@ final class StreamManager: ObservableObject {
     @Published var lastError: String?
     @Published var statusTextPublished = "Ready"
 
-    let configuration = StreamConfiguration.default1080p60
+    let configuration = StreamConfiguration.default1080p30
     private var controller: StreamController?
 
     var statusText: String {

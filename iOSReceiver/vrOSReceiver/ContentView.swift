@@ -112,7 +112,7 @@ final class ReceiverViewModel: ObservableObject {
     @Published var frameCount: Int64 = 0
     @Published var estimatedLatency: Int = 0
 
-    let configuration = StreamConfiguration.default1080p60
+    let configuration = StreamConfiguration.default1080p30
     let renderer = MetalRenderer()
 
     private var usbListener: USBListener?
@@ -192,10 +192,10 @@ struct StreamConfiguration: Sendable {
     let frameRate: Int
     let bitRate: Int
 
-    static let default1080p60 = StreamConfiguration(
+    static let default1080p30 = StreamConfiguration(
         width: 1920,
         height: 1080,
-        frameRate: 60,
-        bitRate: 20_000_000
+        frameRate: 30,
+        bitRate: 15_000_000
     )
 }

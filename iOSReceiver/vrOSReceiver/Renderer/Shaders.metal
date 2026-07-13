@@ -13,7 +13,8 @@ struct Uniforms {
     float distortionK1;
     float distortionK2;
     float eyeSeparation;
-    float3 padding;
+    float caRed;
+    float caBlue;
 };
 
 vertex VertexOut vertexShader(
@@ -45,9 +46,18 @@ fragment float4 fragmentShader(
     float2 centered = uv - 0.5;
     float r2 = dot(centered, centered);
     float r4 = r2 * r2;
-    float2 distorted = centered * (1.0 + uniforms.distortionK1 * r2 + uniforms.distortionK2 * r4);
-    float2 sourceUV = distorted + 0.5;
+    float k1 = uniforms.distortionK1;
+    float k2 = uniforms.distortionK2;
+    float dist = 1.0 + k1 * r2 + k2 * r4;
+    float2 distorted = centered * dist;
 
-    float4 color = texture.sample(samp, sourceUV);
+    float2 distortedR = centered * (1.0 + (k1 + uniforms.caRed) * r2 + k2 * r4);
+    float2 distortedB = centered * (1.0 + (k1 + uniforms.caBlue) * r2 + k2 * r4);
+
+    float4 color;
+    color.r = texture.sample(samp, distortedR + 0.5).r;
+    color.g = texture.sample(samp, distorted + 0.5).g;
+    color.b = texture.sample(samp, distortedB + 0.5).b;
+    color.a = 1.0;
     return color;
 }
