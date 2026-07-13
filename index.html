@@ -8,89 +8,226 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background: #0a0a0f;
-      color: #e0e0e0;
-      line-height: 1.6;
+      background: #08080c;
+      color: #d0d0d8;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
-    .container { max-width: 880px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
 
-    /* Header */
-    header {
-      padding: 3rem 0 2rem;
-      text-align: center;
-      border-bottom: 1px solid #1e1e2a;
+    /* Nav */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #16161f;
     }
-    .logo {
-      font-size: 2.5rem;
+    .nav-logo {
       font-weight: 700;
-      letter-spacing: 0.05em;
+      font-size: 1.1rem;
       background: linear-gradient(135deg, #6eb8ff, #a78bfa);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .subtitle {
-      font-size: 1.05rem;
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
       color: #888;
-      margin-top: 0.4rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
     }
+    .nav-links a:hover { color: #c0c; }
 
     /* Hero */
     .hero {
-      padding: 3rem 0;
+      padding: 4rem 0 3rem;
       text-align: center;
     }
-    .hero h2 {
-      font-size: 1.6rem;
-      font-weight: 600;
+    .hero-icon {
+      font-size: 3rem;
       margin-bottom: 1rem;
+      display: block;
     }
-    .hero p {
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #6eb8ff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    .hero .tagline {
+      font-size: 1.15rem;
+      color: #999;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .hero .desc {
       max-width: 640px;
-      margin: 0 auto 1.5rem;
-      color: #aaa;
-      font-size: 1.05rem;
+      margin: 0 auto 2rem;
+      color: #777;
+      font-size: 0.95rem;
     }
     .btn {
       display: inline-block;
-      padding: 0.7rem 1.6rem;
+      padding: 0.75rem 2rem;
       background: linear-gradient(135deg, #6eb8ff, #a78bfa);
       color: #fff;
       font-weight: 600;
       text-decoration: none;
-      border-radius: 8px;
-      transition: opacity 0.2s;
+      border-radius: 10px;
+      transition: opacity 0.2s, transform 0.15s;
     }
-    .btn:hover { opacity: 0.85; }
+    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #333;
+      color: #bbb;
+      margin-left: 0.75rem;
+    }
+    .btn-outline:hover { border-color: #a78bfa; color: #fff; }
+
+    /* Section */
+    section { padding: 3rem 0; }
+    section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #d0d0e0;
+    }
+    section h2::before {
+      content: "# ";
+      color: #a78bfa;
+      font-weight: 400;
+    }
 
     /* Diagram */
     .diagram-wrap {
-      background: #11111a;
-      border: 1px solid #1e1e2a;
+      background: #0e0e16;
+      border: 1px solid #1a1a28;
       border-radius: 12px;
       padding: 1.5rem;
-      margin: 2rem 0;
+      margin: 1.5rem 0;
       font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
       font-size: 0.8rem;
       line-height: 1.5;
       overflow-x: auto;
     }
-    .diagram-wrap pre { white-space: pre; }
+    .diagram-wrap pre { white-space: pre; color: #999; }
 
-    /* Sections */
-    section { padding: 2rem 0; }
-    section h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #c0c0e0;
+    /* Steps */
+    .steps { display: flex; flex-direction: column; gap: 0.75rem; }
+    .step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem 1.2rem;
+      background: #0e0e16;
+      border: 1px solid #1a1a28;
+      border-radius: 10px;
     }
-    section p { color: #aaa; margin-bottom: 0.8rem; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6eb8ff, #a78bfa);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .step-body h3 {
+      font-size: 0.95rem;
+      color: #d0d0e0;
+      margin-bottom: 0.2rem;
+    }
+    .step-body p {
+      font-size: 0.85rem;
+      color: #777;
+    }
+    .step-body code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8rem;
+      background: #16161f;
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
+      color: #aaa;
+    }
+
+    /* Feature grid */
+    .features { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.8rem; }
+    .feature {
+      background: #0e0e16;
+      border: 1px solid #1a1a28;
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+    .feature h3 {
+      font-size: 0.9rem;
+      color: #d0d0e0;
+      margin-bottom: 0.3rem;
+    }
+    .feature p {
+      font-size: 0.82rem;
+      color: #777;
+    }
+
+    .feature-icon { font-size: 1.4rem; margin-bottom: 0.4rem; display: block; }
+
+    /* Protocol */
+    .proto-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin: 1rem 0;
+    }
+    .proto-table th {
+      text-align: left;
+      padding: 0.5rem 0.8rem;
+      background: #0e0e16;
+      color: #999;
+      font-weight: 600;
+      border-bottom: 1px solid #1a1a28;
+    }
+    .proto-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid #16161f;
+      color: #888;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.78rem;
+    }
+    .proto-table td:first-child { color: #bbb; }
+
+    /* Tech grid */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 0.7rem;
+    }
+    .tech-grid span {
+      background: #0e0e16;
+      border: 1px solid #1a1a28;
+      border-radius: 8px;
+      padding: 0.5rem 0.7rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: #aaa;
+    }
+
+    /* Lists */
     ul { list-style: none; padding: 0; }
     ul li {
-      padding: 0.4rem 0 0.4rem 1.4rem;
+      padding: 0.3rem 0 0.3rem 1.3rem;
       position: relative;
-      color: #aaa;
+      color: #888;
+      font-size: 0.9rem;
     }
     ul li::before {
       content: "›";
@@ -100,93 +237,232 @@
       font-weight: 700;
     }
 
-    /* Tech grid */
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-      gap: 0.8rem;
-      margin-top: 1rem;
-    }
-    .tech-grid span {
-      background: #16161f;
-      border: 1px solid #1e1e2a;
-      border-radius: 8px;
-      padding: 0.5rem 0.8rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #ccc;
-    }
-
     /* Footer */
     footer {
-      border-top: 1px solid #1e1e2a;
+      border-top: 1px solid #16161f;
       padding: 2rem 0;
       text-align: center;
-      font-size: 0.85rem;
-      color: #666;
+      font-size: 0.82rem;
+      color: #555;
     }
-    footer a { color: #a78bfa; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    footer a { color: #888; text-decoration: none; }
+    footer a:hover { color: #a78bfa; }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .features { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .btn-outline { margin-left: 0; margin-top: 0.5rem; display: inline-block; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="logo">vrOS</div>
-      <div class="subtitle">macOS → iPhone VR Desktop Streaming</div>
+    <nav>
+      <span class="nav-logo">vrOS</span>
+      <div class="nav-links">
+        <a href="#pipeline">Pipeline</a>
+        <a href="#features">Features</a>
+        <a href="#protocol">Protocol</a>
+        <a href="#setup">Setup</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <span class="hero-icon">🥽</span>
+      <h1>vrOS</h1>
+      <p class="tagline">macOS desktop → iPhone VR headset, over USB</p>
+      <p class="desc">Low-latency H.264 streaming from your Mac to a Cardboard-compatible mobile VR headset. All-hardware pipeline: ScreenCaptureKit → VideoToolbox → Metal.</p>
+      <a class="btn" href="https://github.com/justwaters/vrOS">View on GitHub</a>
+      <a class="btn btn-outline" href="#setup">Get started</a>
     </header>
 
-    <section class="hero">
-      <h2>Your desktop. In a VR headset. Over USB.</h2>
-      <p>vrOS captures your macOS display, encodes it to H.264 in real-time, and streams it over USB to an iPhone for low-latency viewing inside a Google Cardboard or similar mobile VR headset.</p>
-      <a class="btn" href="https://github.com/justwaters/vrOS">View on GitHub</a>
-    </section>
-
-    <!-- Architecture Diagram -->
-    <div class="diagram-wrap">
+    <!-- Architecture -->
+    <section id="pipeline">
+      <h2>Pipeline</h2>
+      <div class="diagram-wrap">
 <pre>
-┌──────────────────────────────┐          USB TCP (localhost:2345)         ┌──────────────────────────────┐
-│       macOS Sender App       │  ────── H.264 in custom packets ────────▶ │       iOS Receiver App       │
-│                              │                                            │                              │
-│  ScreenCaptureKit ─► Video   │                                            │ VideoToolbox ─► Metal + VR   │
-│  captures display     encode │                                            │   decode        lens distort │
-│                              │                                            │               SBS stereo     │
-│  StreamController            │                                            │  ReceiverViewModel          │
-│    ├─ VideoEncoder (actor)   │                                            │    ├─ USBListener           │
-│    ├─ USBClient (TCP)        │                                            │    ├─ VideoDecoder           │
-│    └─ SCStream               │                                            │    └─ MetalRenderer          │
-└──────────────────────────────┘                                            └──────────────────────────────┘</pre>
-    </div>
+┌──────────────────────────────┐        USB TCP (localhost:2345)         ┌──────────────────────────────┐
+│       macOS Sender App       │ ──── H.264 in custom packets ─────────▶ │       iOS Receiver App       │
+│                              │                                          │                              │
+│  ScreenCaptureKit ─► Video   │                                          │ VideoToolbox ─► Metal + VR   │
+│  captures display     encode │                                          │   decode        lens distort │
+│                              │                                          │               SBS stereo     │
+│  StreamController            │                                          │  ReceiverViewModel          │
+│    ├─ VideoEncoder (actor)   │                                          │    ├─ USBListener           │
+│    ├─ USBClient (TCP)        │                                          │    ├─ VideoDecoder           │
+│    └─ SCStream               │                                          │    └─ MetalRenderer          │
+└──────────────────────────────┘                                          └──────────────────────────────┘</pre>
+      </div>
+    </section>
 
     <!-- How it works -->
     <section>
-      <h3>How it works</h3>
-      <ol style="color: #aaa; padding-left: 1.2rem;">
-        <li style="margin-bottom: 0.5rem;"><strong style="color: #ccc;">Capture</strong> — ScreenCaptureKit grabs the primary display at 1920×1080 @ 30 fps.</li>
-        <li style="margin-bottom: 0.5rem;"><strong style="color: #ccc;">Encode</strong> — VideoToolbox hardware-encodes frames to H.264 Annex B.</li>
-        <li style="margin-bottom: 0.5rem;"><strong style="color: #ccc;">Stream</strong> — Frames are packetized and sent over TCP via USB tethering (<code>iproxy 2345 2345</code>).</li>
-        <li style="margin-bottom: 0.5rem;"><strong style="color: #ccc;">Decode</strong> — iOS receives and decodes H.264 frames via VideoToolbox.</li>
-        <li style="margin-bottom: 0.5rem;"><strong style="color: #ccc;">Render</strong> — Metal shaders apply barrel distortion and chromatic aberration correction for VR lenses, rendered side-by-side for stereo viewing.</li>
-      </ol>
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <h3>Capture</h3>
+            <p>ScreenCaptureKit grabs the primary display at 1920×1080 @ 30 fps.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <h3>Encode</h3>
+            <p>VideoToolbox hardware-encodes frames to H.264 Annex B format with SPS/PPS config packets.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <h3>Stream</h3>
+            <p>Frames are packetized in a custom binary protocol and sent over TCP via USB tethering — <code>iproxy 2345 2345</code>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <h3>Decode</h3>
+            <p>iOS receives the packets, converts Annex B to AVCC NALUs, and feeds them to <code>VTDecompressionSession</code>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">5</span>
+          <div class="step-body">
+            <h3>Render</h3>
+            <p>Metal shaders apply barrel distortion and chromatic aberration correction per eye, rendered side-by-side via instanced draw calls.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Key features -->
+    <!-- Features -->
+    <section id="features">
+      <h2>Features</h2>
+      <div class="features">
+        <div class="feature">
+          <span class="feature-icon">⚡</span>
+          <h3>All-hardware pipeline</h3>
+          <p>ScreenCaptureKit → VideoToolbox H.264 → Metal GPU render — no software fallbacks, minimal CPU load.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🔌</span>
+          <h3>USB transport</h3>
+          <p>No Wi-Fi needed. Communication runs over USB tethering via TCP (iproxy port forwarding).</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🥽</span>
+          <h3>VR lens correction</h3>
+          <p>Barrel distortion shader compensates for VR headset lenses, with configurable K1/K2 parameters.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🔬</span>
+          <h3>Chromatic aberration</h3>
+          <p>Per-channel distortion offsets (red/blue) to cancel lens-induced color fringing at screen edges.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">👁️</span>
+          <h3>Stereo SBS rendering</h3>
+          <p>Side-by-side stereo via Metal instanced draw calls. Each eye renders independently with its own lens distortion.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">📦</span>
+          <h3>Custom wire protocol</h3>
+          <p>30-byte binary header (magic, type, seq, timestamp, checksum) + variable payload for config, video, and control packets.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🦺</span>
+          <h3>Swift 6 concurrency</h3>
+          <p>Actors, AsyncStreams, and strict Sendable throughout. The encoder is a Swift actor; the network layer uses async streams.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">📊</span>
+          <h3>Latency HUD</h3>
+          <p>On-screen overlay shows connection state, resolution, framerate, frame/packet counts, decoder status, and estimated latency.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wire Protocol -->
+    <section id="protocol">
+      <h2>Wire Protocol</h2>
+      <p style="color:#777;font-size:0.9rem;margin-bottom:1.5rem;">Custom binary protocol over TCP, port <strong style="color:#aaa;">2345</strong>. Each packet starts with a 30-byte header.</p>
+
+      <h3 style="font-size:0.95rem;color:#d0d0e0;margin-bottom:0.5rem;">Header</h3>
+      <table class="proto-table">
+        <tr><th>Offset</th><th>Size</th><th>Field</th><th>Notes</th></tr>
+        <tr><td>0</td><td>4</td><td>0x55534250</td><td>Magic — "USBP"</td></tr>
+        <tr><td>4</td><td>2</td><td>Version</td><td>Protocol version</td></tr>
+        <tr><td>6</td><td>2</td><td>Packet type</td><td>config / keyFrame / videoFrame / heartbeat / keyFrameRequest</td></tr>
+        <tr><td>8</td><td>2</td><td>Flags</td><td>isKeyFrame, isEndOfFrame, isConfig, isHeartbeat</td></tr>
+        <tr><td>10</td><td>4</td><td>Sequence</td><td>Monotonic counter</td></tr>
+        <tr><td>14</td><td>8</td><td>Timestamp</td><td>Nanoseconds</td></tr>
+        <tr><td>22</td><td>4</td><td>Payload length</td><td>Variable</td></tr>
+        <tr><td>26</td><td>4</td><td>Checksum</td><td></td></tr>
+      </table>
+
+      <h3 style="font-size:0.95rem;color:#d0d0e0;margin:1.5rem 0 0.5rem;">Packet types</h3>
+      <table class="proto-table">
+        <tr><th>Type</th><th>Value</th><th>Payload</th></tr>
+        <tr><td>Config</td><td>0x0001</td><td>SPS + PPS (Annex B start codes)</td></tr>
+        <tr><td>ConfigAck</td><td>0x0002</td><td>—</td></tr>
+        <tr><td>KeyFrame</td><td>0x0010</td><td>H.264 key frame (Annex B)</td></tr>
+        <tr><td>VideoFrame</td><td>0x0011</td><td>H.264 frame (Annex B)</td></tr>
+        <tr><td>Heartbeat</td><td>0x0100</td><td>—</td></tr>
+        <tr><td>KeyFrameRequest</td><td>0x0101</td><td>—</td></tr>
+      </table>
+      <p style="color:#666;font-size:0.78rem;margin-top:0.5rem;">NALU format: macOS sends Annex B (start-code prefixed). iOS converts to AVCC (4-byte length-prefixed) before feeding to VideoToolbox.</p>
+    </section>
+
+    <!-- Setup -->
+    <section id="setup">
+      <h2>Setup</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div class="step-body">
+            <h3>Generate projects</h3>
+            <p><code>chmod +x setup_xcode_projects.sh && ./setup_xcode_projects.sh</code></p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div class="step-body">
+            <h3>Configure signing</h3>
+            <p>Open each <code>.xcodeproj</code> in Xcode and set your development team in Signing & Capabilities.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div class="step-body">
+            <h3>Build &amp; run</h3>
+            <p>Install both apps from Xcode — macOS sender and iOS receiver.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <div class="step-body">
+            <h3>Forward USB &amp; connect</h3>
+            <p><code>iproxy 2345 2345</code> — then launch the iOS app (listener), then the macOS app (start streaming).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Requirements / Tech -->
     <section>
-      <h3>Key features</h3>
+      <h2>Requirements</h2>
       <ul>
-        <li>All-hardware pipeline — ScreenCaptureKit → VideoToolbox encode/decode → Metal GPU render</li>
-        <li>Low latency over USB tethering — no Wi-Fi dependency</li>
-        <li>VR lens correction — barrel distortion with configurable K1/K2 parameters</li>
-        <li>Chromatic aberration correction — per-channel distortion for red/blue fringing</li>
-        <li>Stereo side-by-side rendering via Metal instanced draw calls</li>
-        <li>Custom binary wire protocol — 30-byte header + variable payload with SPS/PPS config packets</li>
-        <li>Swift 6 concurrency — actors, AsyncStreams, and strict Sendable throughout</li>
+        <li>macOS 13.0+ (Ventura) — sender</li>
+        <li>iOS 16.0+ — receiver</li>
+        <li>Xcode 15.0+ with Swift 6 language mode</li>
+        <li>USB cable (for tethering + iproxy forwarding)</li>
+        <li>A Cardboard-compatible VR headset for the iPhone</li>
       </ul>
-    </section>
 
-    <!-- Tech stack -->
-    <section>
-      <h3>Built with</h3>
+      <h2 style="margin-top: 2rem;">Built with</h2>
       <div class="tech-grid">
         <span>ScreenCaptureKit</span>
         <span>VideoToolbox</span>
@@ -197,18 +473,6 @@
         <span>CoreVideo</span>
         <span>CoreMedia</span>
       </div>
-    </section>
-
-    <!-- Requirements -->
-    <section>
-      <h3>Requirements</h3>
-      <ul>
-        <li>macOS 13.0+ (Ventura) — sender</li>
-        <li>iOS 16.0+ — receiver</li>
-        <li>Xcode 15.0+ with Swift 6 language mode</li>
-        <li>USB cable (for tethering + iproxy forwarding)</li>
-        <li>A Cardboard-compatible VR headset for the iPhone</li>
-      </ul>
     </section>
 
     <footer>
