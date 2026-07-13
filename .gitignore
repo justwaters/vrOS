@@ -1,0 +1,9 @@
+.DS_Store
+
+# Xcode user-specific state
+*.xcuserdata/
+*.xcuserstate
+xcschememanagement.plist
+
+# Backups
+*.bak
