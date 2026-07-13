@@ -12,69 +12,12 @@ struct ContentView: View {
             MetalViewRepresentable(renderer: viewModel.renderer)
                 .ignoresSafeArea()
 
-            VStack {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        HStack {
-                            Circle()
-                                .fill(viewModel.connectionState == .connected ? Color.green : Color.red)
-                                .frame(width: 10, height: 10)
-                            Text(viewModel.connectionStateText)
-                                .font(.headline)
-                                .foregroundStyle(.white)
-                        }
-
-                        if viewModel.connectionState == .connected {
-                            Text("\(viewModel.configuration.width)×\(viewModel.configuration.height) @ \(viewModel.configuration.frameRate)fps")
-                                .font(.caption)
-                                .foregroundStyle(.white.opacity(0.8))
-                            Text("Frames: \(viewModel.frameCount)")
-                                .font(.caption.monospaced())
-                                .foregroundStyle(.white.opacity(0.8))
-                            Text("Packets: \(viewModel.packetCount)")
-                                .font(.caption.monospaced())
-                                .foregroundStyle(.white.opacity(0.8))
-                            Text("Decoder: \(viewModel.decoderReady ? "Ready" : "Waiting")")
-                                .font(.caption.monospaced())
-                                .foregroundStyle(.white.opacity(0.8))
-                            Text("Latency: \(viewModel.estimatedLatency)ms")
-                                .font(.caption.monospaced())
-                                .foregroundStyle(.white.opacity(0.8))
-                        }
-                    }
-                    .padding(12)
-                    .background(.black.opacity(0.6))
-                    .cornerRadius(12)
-
-                    Spacer()
-                }
-                .padding()
-
-                Spacer()
-
-                if viewModel.connectionState != .connected {
-                    VStack(spacing: 16) {
-                        Image(systemName: "iphone.gen3.radiowaves.left.and.right")
-                            .font(.system(size: 64))
-                            .foregroundStyle(.white)
-
-                        Text("Connect macOS Sender via USB")
-                            .font(.title2)
-                            .foregroundStyle(.white)
-
-                        Text("Ensure vrOS Sender is running on Mac")
-                            .font(.caption)
-                            .foregroundStyle(.white.opacity(0.7))
-
-                        Button("Retry Connection") {
-                            Task { await viewModel.reconnect() }
-                        }
-                        .buttonStyle(.borderedProminent)
-                    }
-                    .padding()
-                    .background(.black.opacity(0.7))
-                    .cornerRadius(20)
-                }
+            if viewModel.connectionState != .connected {
+                StandbyView(state: viewModel.connectionState, onRetry: {
+                    Task { await viewModel.reconnect() }
+                })
+            } else {
+                HUDView(viewModel: viewModel)
             }
         }
         .statusBarHidden()
@@ -85,6 +28,130 @@ struct ContentView: View {
         .onDisappear {
             Task { await viewModel.stop() }
         }
+    }
+}
+
+private struct StandbyView: View {
+    let state: ConnectionState
+    let onRetry: () -> Void
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Spacer()
+
+            Image(systemName: "visionpro")
+                .font(.system(size: 72))
+                .foregroundStyle(
+                    LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing)
+                )
+                .opacity(0.9)
+                .padding(.bottom, 24)
+
+            Text("vrOS")
+                .font(.system(size: 32, weight: .bold))
+                .foregroundStyle(
+                    LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing)
+                )
+                .padding(.bottom, 8)
+
+            switch state {
+            case .disconnected:
+                Text("Connect macOS Sender via USB")
+                    .font(.body)
+                    .foregroundStyle(.white.opacity(0.8))
+                Text("Ensure vrOS Sender is running on your Mac")
+                    .font(.caption)
+                    .foregroundStyle(.white.opacity(0.5))
+                    .padding(.bottom, 32)
+                Button(action: onRetry) {
+                    Label("Retry Connection", systemImage: "arrow.clockwise")
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.blue)
+
+            case .connecting:
+                ProgressView()
+                    .controlSize(.large)
+                    .padding(.bottom, 16)
+                Text("Listening for incoming connection...")
+                    .font(.callout)
+                    .foregroundStyle(.white.opacity(0.6))
+
+            case .failed:
+                Text("Connection Failed")
+                    .font(.body)
+                    .foregroundStyle(.red.opacity(0.9))
+                    .padding(.bottom, 4)
+                Text("Check that iproxy is running on your Mac")
+                    .font(.caption)
+                    .foregroundStyle(.white.opacity(0.5))
+                    .padding(.bottom, 32)
+                Button(action: onRetry) {
+                    Label("Retry", systemImage: "arrow.clockwise")
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.red)
+
+            default:
+                EmptyView()
+            }
+
+            Spacer()
+        }
+        .padding(.horizontal, 32)
+        .background(.black.opacity(0.55))
+    }
+}
+
+private struct HUDView: View {
+    @ObservedObject var viewModel: ReceiverViewModel
+
+    var body: some View {
+        GeometryReader { geo in
+            let halfW = geo.size.width / 2
+
+            HUDCard(viewModel: viewModel)
+                .position(x: halfW / 2 + 10, y: 24)
+
+            HUDCard(viewModel: viewModel)
+                .position(x: halfW + halfW / 2 + 10, y: 24)
+        }
+    }
+}
+
+private struct HUDCard: View {
+    @ObservedObject var viewModel: ReceiverViewModel
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 6) {
+                Circle()
+                    .fill(Color.green)
+                    .frame(width: 8, height: 8)
+                Text("Connected")
+                    .font(.callout.weight(.medium))
+                    .foregroundStyle(.white)
+            }
+
+            Text("\(viewModel.configuration.width)×\(viewModel.configuration.height) @ \(viewModel.configuration.frameRate)fps")
+                .font(.caption2)
+                .foregroundStyle(.white.opacity(0.7))
+
+            HStack(spacing: 12) {
+                Label("\(viewModel.frameCount)", systemImage: "film")
+                    .font(.caption2.monospaced())
+                    .foregroundStyle(.white.opacity(0.6))
+                Label("\(viewModel.estimatedLatency)ms", systemImage: "clock")
+                    .font(.caption2.monospaced())
+                    .foregroundStyle(.white.opacity(0.6))
+                Label(viewModel.decoderReady ? "Ready" : "Waiting", systemImage: "antenna.radiowaves.left.and.right")
+                    .font(.caption2.monospaced())
+                    .foregroundStyle(.white.opacity(0.6))
+            }
+        }
+        .padding(10)
+        .background(.ultraThinMaterial)
+        .cornerRadius(10)
     }
 }
 
@@ -119,6 +186,7 @@ final class ReceiverViewModel: ObservableObject {
     private var videoDecoder: VideoDecoder?
     private var processingTask: Task<Void, Never>?
     private var lastFrameTime: UInt64 = 0
+    private var lastLatencyUpdate: UInt64 = 0
     @Published var packetCount: Int = 0
     @Published var decoderReady: Bool = false
 
@@ -173,9 +241,10 @@ final class ReceiverViewModel: ObservableObject {
 
     private func handleDecodedFrame(_ frame: VideoDecoder.DecodedFrame) async {
         let now = DispatchTime.now().uptimeNanoseconds
-        if lastFrameTime > 0 {
+        if lastFrameTime > 0, now - lastLatencyUpdate >= 1_000_000_000 {
             let latencyMs = Int((now - lastFrameTime) / 1_000_000)
             await MainActor.run { self.estimatedLatency = latencyMs }
+            lastLatencyUpdate = now
         }
         lastFrameTime = now
 
