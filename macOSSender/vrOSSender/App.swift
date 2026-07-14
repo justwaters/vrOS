@@ -6,6 +6,8 @@ private let logger = Logger(subsystem: "com.vros.sender", category: "App")
 
 @main
 struct VROSSenderApp: App {
+    @StateObject private var streamManager = StreamManager()
+
     init() {
         checkScreenRecordingPermission()
     }
@@ -13,9 +15,15 @@ struct VROSSenderApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(streamManager)
         }
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
+
+        Settings {
+            SettingsView()
+                .environmentObject(streamManager)
+        }
     }
 
     private func checkScreenRecordingPermission() {
@@ -33,7 +41,7 @@ struct VROSSenderApp: App {
 }
 
 struct ContentView: View {
-    @StateObject private var streamManager = StreamManager()
+    @EnvironmentObject var streamManager: StreamManager
 
     var body: some View {
         VStack(spacing: 20) {
@@ -102,6 +110,8 @@ final class StreamManager: ObservableObject {
     @Published var lastError: String?
     @Published var statusTextPublished = "Ready"
 
+    @Published var distortionK1: Float = 0.2
+    @Published var distortionK2: Float = 2.0
     let configuration = StreamConfiguration.default1080p30
     private var controller: StreamController?
 
@@ -120,6 +130,7 @@ final class StreamManager: ObservableObject {
             controller = try await StreamController(configuration: configuration)
             await controller?.startStreaming()
             isStreaming = true
+            sendDistortion()
             startFrameCounter()
         } catch {
             lastError = error.localizedDescription
@@ -136,6 +147,10 @@ final class StreamManager: ObservableObject {
         isStreaming = false
         frameCount = 0
         isStopping = false
+    }
+
+    func sendDistortion() {
+        Task { await controller?.sendDistortion(k1: distortionK1, k2: distortionK2) }
     }
 
     private func startFrameCounter() {

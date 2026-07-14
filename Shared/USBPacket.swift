@@ -70,6 +70,7 @@ public struct USBPacket: Sendable {
         case videoFrame = 0x0011
         case heartbeat = 0x0100
         case keyFrameRequest = 0x0101
+        case distortion = 0x0120
     }
 
     public static func parse(_ data: Data) -> USBPacket? {
@@ -106,5 +107,23 @@ public struct USBPacket: Sendable {
         )
 
         return USBPacket(header: header, payload: Data(payload))
+    }
+}
+
+public extension USBPacket {
+    static func distortionPacket(k1: Float, k2: Float, sequenceNumber: UInt32) -> USBPacket {
+        let k1Bits = k1.bitPattern.bigEndian
+        let k2Bits = k2.bitPattern.bigEndian
+        var payload = Data()
+        payload.append(contentsOf: withUnsafeBytes(of: k1Bits) { Data($0) })
+        payload.append(contentsOf: withUnsafeBytes(of: k2Bits) { Data($0) })
+        return USBPacket(type: .distortion, sequenceNumber: sequenceNumber, timestamp: 0, payload: payload)
+    }
+
+    static func parseDistortionPayload(_ payload: Data) -> (k1: Float, k2: Float)? {
+        guard payload.count >= 8 else { return nil }
+        let k1Bits = payload.withUnsafeBytes { $0.load(fromByteOffset: 0, as: UInt32.self) }.bigEndian
+        let k2Bits = payload.withUnsafeBytes { $0.load(fromByteOffset: 4, as: UInt32.self) }.bigEndian
+        return (Float(bitPattern: k1Bits), Float(bitPattern: k2Bits))
     }
 }

@@ -219,8 +219,15 @@ final class ReceiverViewModel: ObservableObject {
         Task {
             for await packet in usbListener!.packetStream {
                 print("📦 Packet received: type=\(packet.header.type) seq=\(packet.header.sequenceNumber) size=\(packet.payload.count)")
-                await MainActor.run { self.packetCount &+= 1 }
-                await videoDecoder?.processPacket(packet)
+                if packet.header.type == .distortion {
+                    if let (k1, k2) = USBPacket.parseDistortionPayload(packet.payload) {
+                        await MainActor.run { self.renderer.updateDistortion(k1: k1, k2: k2) }
+                        print("📦 Updated distortion: k1=\(k1) k2=\(k2)")
+                    }
+                } else {
+                    await MainActor.run { self.packetCount &+= 1 }
+                    await videoDecoder?.processPacket(packet)
+                }
             }
         }
     }
