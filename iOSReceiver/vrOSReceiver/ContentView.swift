@@ -183,7 +183,11 @@ struct MetalViewRepresentable: UIViewRepresentable {
 
 @MainActor
 final class ReceiverViewModel: ObservableObject {
-    @Published var connectionState: ConnectionState = .disconnected
+    @Published var connectionState: ConnectionState = .disconnected {
+        didSet {
+            UIApplication.shared.isIdleTimerDisabled = connectionState == .connected
+        }
+    }
     @Published var frameCount: Int64 = 0
     @Published var estimatedLatency: Int = 0
 
