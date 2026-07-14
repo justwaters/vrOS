@@ -17,7 +17,15 @@ struct ContentView: View {
                     Task { await viewModel.reconnect() }
                 })
             } else {
-                HUDView(viewModel: viewModel)
+                ZStack {
+                    HUDView(viewModel: viewModel)
+                    GeometryReader { geo in
+                        Rectangle()
+                            .fill(Color.white.opacity(0.2))
+                            .frame(width: 1)
+                            .position(x: geo.size.width / 2, y: geo.size.height / 2)
+                    }
+                }
             }
         }
         .statusBarHidden()

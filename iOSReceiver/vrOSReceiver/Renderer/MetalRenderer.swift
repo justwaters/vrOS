@@ -35,7 +35,7 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
         distortionK1: 0.2,
         distortionK2: 2.0,
         eyeSeparation: 0.85,
-        verticalScale: 0.75,
+        verticalScale: 0.6,
         eyeRoundness: 0.35,
         caRed: -0.002,
         caBlue: 0.002
