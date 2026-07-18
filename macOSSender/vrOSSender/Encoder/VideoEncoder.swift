@@ -154,26 +154,6 @@ actor VideoEncoder {
         }
     }
 
-    private func convertToAnnexB(_ data: UnsafeMutablePointer<UInt8>, length: Int) -> Data {
-        var output = Data()
-        var offset = 0
-
-        while offset < length {
-            guard offset + 4 <= length else { break }
-
-            let nalLength = UInt32(data[offset]) << 24 | UInt32(data[offset + 1]) << 16 | UInt32(data[offset + 2]) << 8 | UInt32(data[offset + 3])
-            offset += 4
-
-            guard offset + Int(nalLength) <= length else { break }
-
-            output.append(contentsOf: [0x00, 0x00, 0x00, 0x01])
-            output.append(data + offset, count: Int(nalLength))
-            offset += Int(nalLength)
-        }
-
-        return output
-    }
-
     func encodeFrame(_ pixelBuffer: CVPixelBuffer, presentationTime: CMTime) async throws {
         guard let session = compressionSession else {
             throw EncodingError.sessionNotReady

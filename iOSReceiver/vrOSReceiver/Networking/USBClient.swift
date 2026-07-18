@@ -93,11 +93,8 @@ final class USBListener: @unchecked Sendable {
         connection?.receive(minimumIncompleteLength: 1, maximumLength: 65536) { [weak self] data, _, isComplete, error in
             guard let self = self else { return }
 
-            if let data = data {
-                print("📥 Received raw data: \(data.count) bytes")
-                if !data.isEmpty {
-                    self.processBuffer(data)
-                }
+            if let data = data, !data.isEmpty {
+                self.processBuffer(data)
             }
 
 

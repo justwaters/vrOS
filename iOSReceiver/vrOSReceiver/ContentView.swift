@@ -25,6 +25,22 @@ struct ContentView: View {
                             .frame(width: 1)
                             .position(x: geo.size.width / 2, y: geo.size.height / 2)
                     }
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Button(action: { viewModel.renderer.cardboardManager.scanQrCode() }) {
+                                Image(systemName: "qrcode.viewfinder")
+                                    .font(.title2)
+                                    .foregroundStyle(.white)
+                                    .padding(8)
+                                    .background(.ultraThinMaterial)
+                                    .clipShape(Circle())
+                            }
+                            .padding(.trailing, 16)
+                            .padding(.top, 8)
+                        }
+                        Spacer()
+                    }
                 }
             }
         }
@@ -175,6 +191,11 @@ struct MetalViewRepresentable: UIViewRepresentable {
         view.framebufferOnly = true
         view.enableSetNeedsDisplay = false
         view.isOpaque = true
+
+        let tap = UITapGestureRecognizer(target: renderer, action: #selector(MetalRenderer.handleTap(_:)))
+        tap.numberOfTapsRequired = 1
+        view.addGestureRecognizer(tap)
+
         return view
     }
 
@@ -230,16 +251,9 @@ final class ReceiverViewModel: ObservableObject {
 
         Task {
             for await packet in usbListener!.packetStream {
-                print("📦 Packet received: type=\(packet.header.type) seq=\(packet.header.sequenceNumber) size=\(packet.payload.count)")
-                if packet.header.type == .distortion {
-                    if let (k1, k2) = USBPacket.parseDistortionPayload(packet.payload) {
-                        await MainActor.run { self.renderer.updateDistortion(k1: k1, k2: k2) }
-                        print("📦 Updated distortion: k1=\(k1) k2=\(k2)")
-                    }
-                } else {
-                    await MainActor.run { self.packetCount &+= 1 }
-                    await videoDecoder?.processPacket(packet)
-                }
+                logger.info("Packet received: type=\(packet.header.type.rawValue, privacy: .public) seq=\(packet.header.sequenceNumber, privacy: .public) size=\(packet.payload.count, privacy: .public)")
+                await MainActor.run { self.packetCount &+= 1 }
+                await videoDecoder?.processPacket(packet)
             }
         }
     }
@@ -272,6 +286,7 @@ final class ReceiverViewModel: ObservableObject {
             self.renderer.updateTexture(frame.pixelBuffer)
         }
     }
+
 }
 
 struct StreamConfiguration: Sendable {
