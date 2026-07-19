@@ -170,8 +170,6 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
     }
 
     func draw(in view: MTKView) {
-        cardboardManager.checkAndReloadDeviceParams()
-
         guard let texture = currentTexture,
               eyeTextures.count == 2,
               let commandBuffer = commandQueue.makeCommandBuffer() else { return }

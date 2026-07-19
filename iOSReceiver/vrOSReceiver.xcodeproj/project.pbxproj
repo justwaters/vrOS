@@ -26,7 +26,7 @@
 		A4A74AC2C4E0D118E38E9D0C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7B83FACABA683AD1A85C27 /* ContentView.swift */; };
 		A763494D43C740C8A84F72D4 /* neck_model.cc in Sources */ = {isa = PBXBuildFile; fileRef = C95D528287634678AD29A4AB /* neck_model.cc */; };
 		A93957AAD78C244B8A6B79F8 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6058DC861B44C94E672E1239 /* App.swift */; };
-		AVF1C0DE0001C0DE0001C0DE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AVF2C0DE0002C0DE0002C0DE /* AVFoundation.framework */; };
+
 		B1A2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets */; };
 		BB174E9EC2EA485AB226D798 /* sensor_fusion_ekf.cc in Sources */ = {isa = PBXBuildFile; fileRef = 42E23DE0B2434A57B1862B9B /* sensor_fusion_ekf.cc */; };
 		C3FF7AFA8C956654F57268E9 /* VideoDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2287DDC26399E2796820D35 /* VideoDecoder.swift */; };
@@ -44,12 +44,7 @@
 		DA38C90764F042B78F0EC986 /* CardboardManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 50B4E1BCE29E4737821978DF /* CardboardManager.h */; };
 		EFB0967CE6B0414EBBD12A8D /* rotation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9265CC6251F94193872689B6 /* rotation.cc */; };
 		F2C3D4E5F6A7B8C9D0E1F2C3D4E5F6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C4D5E6F7A8B9C0D1E2F3C4D5E6F7 /* CoreMotion.framework */; };
-		F3A2B4C5D6E7F8A9B0C1D2E3 /* QRCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A1B3C4D5E6F7A8B9C0D1E2 /* QRCodeScanner.swift */; };
 		F4A5A2AC01FFC4676E408795 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 31BE30C360EB1E453552CB5F /* Shaders.metal */; };
-		QRB1C0DE1111C0DE1111C0DE /* qr_code.mm in Sources */ = {isa = PBXBuildFile; fileRef = QR01C0DE1111C0DE1111C0DE /* qr_code.mm */; };
-		QRB2C0DE2222C0DE2222C0DE /* qr_scan_view_controller.mm in Sources */ = {isa = PBXBuildFile; fileRef = QR03C0DE3333C0DE3333C0DE /* qr_scan_view_controller.mm */; };
-		QRB3C0DE3333C0DE3333C0DE /* device_params_helper.mm in Sources */ = {isa = PBXBuildFile; fileRef = QR05C0DE5555C0DE5555C0DE /* device_params_helper.mm */; };
-		QRB4C0DE4444C0DE4444C0DE /* nsurl_session_data_handler.mm in Sources */ = {isa = PBXBuildFile; fileRef = QR07C0DE7777C0DE7777C0DE /* nsurl_session_data_handler.mm */; };
 		SDKB1C0DE0001C0DE0001C0DE /* sdk.bundle in Resources */ = {isa = PBXBuildFile; fileRef = SDKB2C0DE0002C0DE0002C0DE /* sdk.bundle */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +66,7 @@
 		9265CC6251F94193872689B6 /* rotation.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = rotation.cc; path = "../cardboard-sdk/sdk/util/rotation.cc"; sourceTree = SOURCE_ROOT; };
 		A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC2C94FBF58C46AAAEF517B1 /* sensor_event_producer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = sensor_event_producer.mm; path = "../cardboard-sdk/sdk/sensors/ios/sensor_event_producer.mm"; sourceTree = SOURCE_ROOT; };
-		AVF2C0DE0002C0DE0002C0DE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+
 		BDB2A28B63D74EE2B8A61650 /* device_accelerometer_sensor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = device_accelerometer_sensor.mm; path = "../cardboard-sdk/sdk/sensors/ios/device_accelerometer_sensor.mm"; sourceTree = SOURCE_ROOT; };
 		C2287DDC26399E2796820D35 /* VideoDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDecoder.swift; sourceTree = "<group>"; };
 		C3FCFF904050419D9DEF8515 /* head_tracker.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = head_tracker.cc; path = "../cardboard-sdk/sdk/head_tracker.cc"; sourceTree = SOURCE_ROOT; };
@@ -91,18 +86,12 @@
 		F001F001F001F001F001F008 /* cardboard_v1.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = cardboard_v1.cc; path = "../cardboard-sdk/sdk/qrcode/cardboard_v1/cardboard_v1.cc"; sourceTree = SOURCE_ROOT; };
 		F001F001F001F001F001F00A /* screen_params.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = screen_params.mm; path = "../cardboard-sdk/sdk/screen_params/ios/screen_params.mm"; sourceTree = SOURCE_ROOT; };
 		F001F001F001F001F001F00B /* sdk_bundle_finder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = sdk_bundle_finder.mm; path = "../cardboard-sdk/sdk/screen_params/ios/sdk_bundle_finder.mm"; sourceTree = SOURCE_ROOT; };
-		F2A1B3C4D5E6F7A8B9C0D1E2 /* QRCodeScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeScanner.swift; sourceTree = "<group>"; };
+
 		F3C4D5E6F7A8B9C0D1E2F3C4D5E6F7 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		F6ADB8B7DB144480A2273301 /* gyroscope_bias_estimator.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = gyroscope_bias_estimator.cc; path = "../cardboard-sdk/sdk/sensors/gyroscope_bias_estimator.cc"; sourceTree = SOURCE_ROOT; };
 		FCBBF46728474D20A4501E9F /* median_filter.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = median_filter.cc; path = "../cardboard-sdk/sdk/sensors/median_filter.cc"; sourceTree = SOURCE_ROOT; };
-		QR01C0DE1111C0DE1111C0DE /* qr_code.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = qr_code.mm; path = "../cardboard-sdk/sdk/qrcode/ios/qr_code.mm"; sourceTree = SOURCE_ROOT; };
-		QR02C0DE2222C0DE2222C0DE /* qr_scan_view_controller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = qr_scan_view_controller.h; path = "../cardboard-sdk/sdk/qrcode/ios/qr_scan_view_controller.h"; sourceTree = SOURCE_ROOT; };
-		QR03C0DE3333C0DE3333C0DE /* qr_scan_view_controller.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = qr_scan_view_controller.mm; path = "../cardboard-sdk/sdk/qrcode/ios/qr_scan_view_controller.mm"; sourceTree = SOURCE_ROOT; };
-		QR04C0DE4444C0DE4444C0DE /* device_params_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = device_params_helper.h; path = "../cardboard-sdk/sdk/qrcode/ios/device_params_helper.h"; sourceTree = SOURCE_ROOT; };
-		QR05C0DE5555C0DE5555C0DE /* device_params_helper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = device_params_helper.mm; path = "../cardboard-sdk/sdk/qrcode/ios/device_params_helper.mm"; sourceTree = SOURCE_ROOT; };
-		QR06C0DE6666C0DE6666C0DE /* nsurl_session_data_handler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = nsurl_session_data_handler.h; path = "../cardboard-sdk/sdk/qrcode/ios/nsurl_session_data_handler.h"; sourceTree = SOURCE_ROOT; };
-		QR07C0DE7777C0DE7777C0DE /* nsurl_session_data_handler.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = nsurl_session_data_handler.mm; path = "../cardboard-sdk/sdk/qrcode/ios/nsurl_session_data_handler.mm"; sourceTree = SOURCE_ROOT; };
-		SDKB2C0DE0002C0DE0002C0DE /* sdk.bundle */ = {isa = PBXFileReference; lastKnownFileType = wrapper.plug-in; name = sdk.bundle; path = "../cardboard-sdk/sdk/qrcode/ios/sdk.bundle"; sourceTree = SOURCE_ROOT; };
+
+		SDKB2C0DE0002C0DE0002C0DE /* sdk.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = sdk.bundle; path = "../cardboard-sdk/sdk/qrcode/ios/sdk.bundle"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +100,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2C3D4E5F6A7B8C9D0E1F2C3D4E5F6 /* CoreMotion.framework in Frameworks */,
-				AVF1C0DE0001C0DE0001C0DE /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +142,6 @@
 				F001F001F001F001F001F00A /* screen_params.mm */,
 				F001F001F001F001F001F00B /* sdk_bundle_finder.mm */,
 				F3C4D5E6F7A8B9C0D1E2F3C4D5E6F7 /* CoreMotion.framework */,
-				AVF2C0DE0002C0DE0002C0DE /* AVFoundation.framework */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -193,18 +180,10 @@
 				CF45020AA5D14219A9393185 /* vrOSReceiver-Bridging-Header.h */,
 				F5A4B3C2D1E0F9A8B7C6D5E4F3A2B1C0 /* Cardboard */,
 				EF7B83FACABA683AD1A85C27 /* ContentView.swift */,
-				F2A1B3C4D5E6F7A8B9C0D1E2 /* QRCodeScanner.swift */,
 				BE86E423CE7AF90E03EACCD4 /* Decoder */,
 				77FC5E5F65879949490076AC /* Networking */,
 				967ABBE371A6C33ACD1F068B /* Renderer */,
 				646615E93640067544327376 /* Shared */,
-				QR01C0DE1111C0DE1111C0DE /* qr_code.mm */,
-				QR02C0DE2222C0DE2222C0DE /* qr_scan_view_controller.h */,
-				QR03C0DE3333C0DE3333C0DE /* qr_scan_view_controller.mm */,
-				QR04C0DE4444C0DE4444C0DE /* device_params_helper.h */,
-				QR05C0DE5555C0DE5555C0DE /* device_params_helper.mm */,
-				QR06C0DE6666C0DE6666C0DE /* nsurl_session_data_handler.h */,
-				QR07C0DE7777C0DE7777C0DE /* nsurl_session_data_handler.mm */,
 			);
 			path = vrOSReceiver;
 			sourceTree = "<group>";
@@ -296,7 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1A2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets in Resources */,
-		SDKB1C0DE0001C0DE0001C0DE /* sdk.bundle in Resources */,
+				SDKB1C0DE0001C0DE0001C0DE /* sdk.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,7 +293,6 @@
 				8831B87BCDDDE65DB85AC79D /* MetalRenderer.swift in Sources */,
 				F4A5A2AC01FFC4676E408795 /* Shaders.metal in Sources */,
 				D79E611D41DBE4E9C7DD69EE /* USBPacket.swift in Sources */,
-				F3A2B4C5D6E7F8A9B0C1D2E3 /* QRCodeScanner.swift in Sources */,
 				4AC8CDA669B444778055367D /* head_tracker.cc in Sources */,
 				BB174E9EC2EA485AB226D798 /* sensor_fusion_ekf.cc in Sources */,
 				16A293DADE2C420B871E2F59 /* gyroscope_bias_estimator.cc in Sources */,
@@ -342,10 +320,6 @@
 				D001D001D001D001D001D007 /* cardboard_v1.cc in Sources */,
 				D001D001D001D001D001D009 /* screen_params.mm in Sources */,
 				D001D001D001D001D001D00A /* sdk_bundle_finder.mm in Sources */,
-				QRB1C0DE1111C0DE1111C0DE /* qr_code.mm in Sources */,
-				QRB2C0DE2222C0DE2222C0DE /* qr_scan_view_controller.mm in Sources */,
-				QRB3C0DE3333C0DE3333C0DE /* device_params_helper.mm in Sources */,
-				QRB4C0DE4444C0DE4444C0DE /* nsurl_session_data_handler.mm in Sources */,
 				182AA01CE79E4D61865E5B3C /* vrOSReceiver-Bridging-Header.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -485,6 +459,7 @@
 					"$(SRCROOT)/../cardboard-sdk/sdk",
 				);
 				INFOPLIST_FILE = vrOSReceiver/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -514,6 +489,7 @@
 					"$(SRCROOT)/../cardboard-sdk/sdk",
 				);
 				INFOPLIST_FILE = vrOSReceiver/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -42,8 +42,6 @@
 	</dict>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>vrOS Receiver uses local network for USB communication.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Scan Cardboard viewer QR code for correct lens parameters.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>external-accessory</string>

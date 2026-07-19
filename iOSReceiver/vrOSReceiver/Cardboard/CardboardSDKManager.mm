@@ -8,7 +8,6 @@
 #include "lens_distortion.h"
 #include "distortion_renderer.h"
 #include "qrcode/cardboard_v1/cardboard_v1.h"
-#include "qr_code.h"
 
 @interface CardboardSDKManager () {
     std::unique_ptr<cardboard::HeadTracker> _tracker;
@@ -20,7 +19,6 @@
     int _displayWidth;
     int _displayHeight;
     BOOL _ready;
-    int _lastDeviceParamsCount;
 }
 @end
 
@@ -38,7 +36,6 @@
         _lastOrientation = simd_quaternion(0.0f, 0.0f, 0.0f, 1.0f);
         _lastPosition = simd_make_float3(0, 0, 0);
         _referenceOrientation = simd_quaternion(0.0f, 0.0f, 0.0f, 1.0f);
-        _lastDeviceParamsCount = cardboard::qrcode::getDeviceParamsChangedCount();
 
         std::vector<uint8_t> device_params =
             cardboard::qrcode::getCardboardV1DeviceParams();
@@ -131,23 +128,6 @@
     _lensDistortion = newLens;
     _ready = YES;
     NSLog(@"QR: lens distortion reloaded successfully");
-}
-
-- (void)scanQrCode {
-    cardboard::qrcode::scanQrCodeAndSaveDeviceParams();
-}
-
-- (BOOL)checkAndReloadDeviceParams {
-    int currentCount = cardboard::qrcode::getDeviceParamsChangedCount();
-    if (currentCount == _lastDeviceParamsCount) return NO;
-
-    _lastDeviceParamsCount = currentCount;
-    std::vector<uint8_t> params = cardboard::qrcode::getCurrentSavedDeviceParams();
-    if (params.empty()) return NO;
-
-    NSData *data = [NSData dataWithBytes:params.data() length:params.size()];
-    [self reloadWithEncodedDeviceParams:data];
-    return YES;
 }
 
 - (void)renderEyesToDisplayWithCommandEncoder:(id<MTLRenderCommandEncoder>)encoder

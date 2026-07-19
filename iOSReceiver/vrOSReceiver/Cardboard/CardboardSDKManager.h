@@ -38,16 +38,6 @@ NS_SWIFT_SENDABLE
 // Call this to switch from default V1 params to scanned viewer params.
 - (void)reloadWithEncodedDeviceParams:(NSData*)data;
 
-// Launches the SDK's built-in QR code scanner.
-// Presents a full-screen camera view; handles URL redirect resolution,
-// parameter saving, and NSUserDefaults storage internally.
-- (void)scanQrCode;
-
-// Checks if device params have been updated (e.g. via scanQrCode) and
-// reloads lens distortion if so. Call this each frame.
-// Returns YES if params were reloaded.
-- (BOOL)checkAndReloadDeviceParams;
-
 // Composites left/right eye textures to display with barrel distortion.
 // Assumes encoder is already created on the current drawable.
 - (void)renderEyesToDisplayWithCommandEncoder:(id<MTLRenderCommandEncoder>)encoder
