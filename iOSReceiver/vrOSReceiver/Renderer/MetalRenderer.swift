@@ -183,7 +183,23 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
         }
 
         let relativeQuat = simd_mul(headQuat, simd_inverse(cardboardManager.referenceOrientation))
-        let headRotation = float4x4(relativeQuat)
+
+        let fwd = relativeQuat.act(simd_float3(0, 0, -1))
+        let up = relativeQuat.act(simd_float3(0, 1, 0))
+        let axis = simd_normalize(simd_cross(fwd, simd_float3(0, 1, 0)))
+        let headRotation: simd_float4x4
+        if simd_length(axis) > 0.001 {
+            let perp = simd_dot(up, axis) * axis
+            let newUp = simd_normalize(up - 2.0 * perp)
+            let right = simd_normalize(simd_cross(fwd, newUp))
+            headRotation = simd_matrix(
+                simd_float4(right.x, right.y, right.z, 0),
+                simd_float4(newUp.x, newUp.y, newUp.z, 0),
+                simd_float4(-fwd.x, -fwd.y, -fwd.z, 0),
+                simd_float4(0, 0, 0, 1))
+        } else {
+            headRotation = float4x4(relativeQuat)
+        }
 
         let w = Int(lastViewportSize.width)
         let h = Int(lastViewportSize.height)
@@ -208,9 +224,10 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
                 continue
             }
 
-            encoder.setRenderPipelineState(simplePipelineState)
+            encoder.setRenderPipelineState(pipelineState)
             encoder.setVertexBuffer(positionBuffer, offset: 0, index: 0)
             encoder.setVertexBuffer(texCoordBuffer, offset: 0, index: 1)
+            encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 2)
             encoder.setFragmentTexture(texture, index: 0)
             encoder.setFragmentSamplerState(samplerState, index: 0)
             encoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4)

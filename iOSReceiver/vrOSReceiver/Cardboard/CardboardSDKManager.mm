@@ -99,7 +99,7 @@
     float matrix[16];
     _lensDistortion->GetEyeProjectionMatrix(
         static_cast<CardboardEye>(eye), zNear, zFar, matrix);
-    return [self simdFromColMajor:matrix];
+    return [self simdFromRowMajor:matrix];
 }
 
 - (simd_float4x4)eyeFromHeadMatrixForEye:(int)eye {
@@ -107,7 +107,7 @@
     float matrix[16];
     _lensDistortion->GetEyeFromHeadMatrix(
         static_cast<CardboardEye>(eye), matrix);
-    return [self simdFromColMajor:matrix];
+    return [self simdFromRowMajor:matrix];
 }
 
 - (void)reloadWithEncodedDeviceParams:(NSData*)data {
@@ -177,11 +177,11 @@
 
 #pragma mark - Private
 
-- (simd_float4x4)simdFromColMajor:(const float*)matrix {
+- (simd_float4x4)simdFromRowMajor:(const float*)matrix {
     simd_float4 cols[4];
     for (int i = 0; i < 4; i++) {
-        cols[i] = simd_make_float4(matrix[i], matrix[4 + i],
-                                   matrix[8 + i], matrix[12 + i]);
+        cols[i] = simd_make_float4(matrix[i*4 + 0], matrix[i*4 + 1],
+                                   matrix[i*4 + 2], matrix[i*4 + 3]);
     }
     return simd_matrix(cols[0], cols[1], cols[2], cols[3]);
 }

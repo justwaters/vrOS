@@ -26,9 +26,17 @@ vertex VertexOut vertexShader(
 
     float fx = uniforms.projectionMatrix[0][0];
     float fy = uniforms.projectionMatrix[1][1];
-    float halfW = uniforms.screenDistance / fx;
-    float halfH = uniforms.screenDistance / fy;
-    float3 worldPos = float3(pos.x * halfW * 1.8, pos.y * halfH * 1.8, -uniforms.screenDistance);
+    float halfW_fov = uniforms.screenDistance / fx * 0.85;
+    float halfH_fov = uniforms.screenDistance / fy * 0.85;
+    float aspect = uniforms.textureSize.x / uniforms.textureSize.y;
+    float halfW = halfW_fov;
+    float halfH = halfW / aspect;
+    if (halfH > halfH_fov) {
+        halfH = halfH_fov;
+        halfW = halfH * aspect;
+    }
+    float3 worldPos = float3(pos.x * halfW, pos.y * halfH,
+                             -uniforms.screenDistance);
 
     float4 headPos = uniforms.headRotation * float4(worldPos, 1.0);
     float4 eyePos = uniforms.eyeFromHead * headPos;
