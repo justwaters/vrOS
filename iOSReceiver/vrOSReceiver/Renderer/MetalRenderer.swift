@@ -24,8 +24,6 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
     private var eyeTextures: [MTLTexture] = []
     private var lastViewportSize = CGSize.zero
     private var calibrated = false
-    var deadbandMode: DeadbandMode = .off
-    private var lastCommittedQuat = simd_quatf(ix: 0, iy: 0, iz: 0, r: 1)
 
     struct Uniforms {
         var viewportSize: SIMD2<Float>
@@ -186,35 +184,21 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
 
         let relativeQuat = simd_mul(headQuat, simd_inverse(cardboardManager.referenceOrientation))
 
-        let effectiveQuat: simd_quatf
-        switch deadbandMode {
-        case .off:
-            effectiveQuat = relativeQuat
-            lastCommittedQuat = relativeQuat
-        default:
-            let dot = simd_dot(relativeQuat, lastCommittedQuat)
-            let threshold: Float = deadbandMode == .soft ? cos(0.25 * .pi / 180) : cos(1.0 * .pi / 180)
-            if dot < threshold {
-                effectiveQuat = relativeQuat
-                lastCommittedQuat = relativeQuat
-            } else {
-                effectiveQuat = lastCommittedQuat
-            }
-        }
-
-        let fwd = effectiveQuat.act(simd_float3(0, 0, -1))
-        let rawRight = simd_cross(fwd, simd_float3(0, 1, 0))
+        let fwd = relativeQuat.act(simd_float3(0, 0, -1))
+        let up = relativeQuat.act(simd_float3(0, 1, 0))
+        let axis = simd_normalize(simd_cross(fwd, simd_float3(0, 1, 0)))
         let headRotation: simd_float4x4
-        if simd_length_squared(rawRight) > 0.000001 {
-            let right = simd_normalize(rawRight)
-            let newUp = simd_normalize(simd_cross(right, fwd))
+        if simd_length(axis) > 0.001 {
+            let perp = simd_dot(up, axis) * axis
+            let newUp = simd_normalize(up - 2.0 * perp)
+            let right = simd_normalize(simd_cross(fwd, newUp))
             headRotation = simd_matrix(
                 simd_float4(right.x, right.y, right.z, 0),
                 simd_float4(newUp.x, newUp.y, newUp.z, 0),
                 simd_float4(-fwd.x, -fwd.y, -fwd.z, 0),
                 simd_float4(0, 0, 0, 1))
         } else {
-            headRotation = float4x4(effectiveQuat)
+            headRotation = float4x4(relativeQuat)
         }
 
         let w = Int(lastViewportSize.width)

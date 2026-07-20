@@ -224,9 +224,6 @@ final class ReceiverViewModel: ObservableObject {
         videoDecoder?.onDecoderReady = { @MainActor in
             self.decoderReady = true
         }
-        videoDecoder?.onDeadbandUpdate = { @MainActor [weak self] mode in
-            self?.renderer.deadbandMode = mode
-        }
 
         processingTask = Task {
             for await state in usbListener!.stateStream {

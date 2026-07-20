@@ -71,7 +71,6 @@ public struct USBPacket: Sendable {
         case heartbeat = 0x0100
         case keyFrameRequest = 0x0101
         case distortion = 0x0120
-        case deadband = 0x0121
     }
 
     public static func parse(_ data: Data) -> USBPacket? {
@@ -126,29 +125,5 @@ public extension USBPacket {
         let k1Bits = payload.withUnsafeBytes { $0.load(fromByteOffset: 0, as: UInt32.self) }.bigEndian
         let k2Bits = payload.withUnsafeBytes { $0.load(fromByteOffset: 4, as: UInt32.self) }.bigEndian
         return (Float(bitPattern: k1Bits), Float(bitPattern: k2Bits))
-    }
-
-    static func deadbandPacket(mode: DeadbandMode, sequenceNumber: UInt32) -> USBPacket {
-        let payload = Data([mode.rawValue])
-        return USBPacket(type: .deadband, sequenceNumber: sequenceNumber, timestamp: 0, payload: payload)
-    }
-
-    static func parseDeadbandPayload(_ payload: Data) -> DeadbandMode? {
-        guard let first = payload.first else { return nil }
-        return DeadbandMode(rawValue: first)
-    }
-}
-
-public enum DeadbandMode: UInt8, Sendable, CaseIterable {
-    case off = 0
-    case soft = 1
-    case hard = 2
-
-    public var label: String {
-        switch self {
-        case .off: return "Off"
-        case .soft: return "Soft"
-        case .hard: return "Hard"
-        }
     }
 }

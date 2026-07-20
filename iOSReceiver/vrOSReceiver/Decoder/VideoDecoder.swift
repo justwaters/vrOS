@@ -27,7 +27,6 @@ final class VideoDecoder: @unchecked Sendable {
     private var ppsData: Data?
     private var frameCallback: (@Sendable (DecodedFrame) async -> Void)?
     var onDecoderReady: (@Sendable () async -> Void)?
-    var onDeadbandUpdate: (@Sendable (DeadbandMode) async -> Void)?
 
     private let decodingQueue = DispatchQueue(label: "com.vros.decoding", qos: .userInteractive)
     private var pendingNALs: [Data] = []
@@ -48,10 +47,6 @@ final class VideoDecoder: @unchecked Sendable {
             await handleConfigPacket(packet.payload)
         case .keyFrame, .videoFrame:
             await handleVideoPacket(packet)
-        case .deadband:
-            if let mode = USBPacket.parseDeadbandPayload(packet.payload) {
-                await onDeadbandUpdate?(mode)
-            }
         default:
             break
         }

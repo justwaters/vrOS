@@ -38,14 +38,6 @@ final class StreamController: NSObject, SCStreamOutput, SCStreamDelegate, @unche
 
         super.init()
 
-        self.usbClient.onDisconnect = { [weak self] in
-            Task { @MainActor in
-                guard let self else { return }
-                logger.error("USB disconnected, stopping stream")
-                await self.stopStreaming()
-            }
-        }
-
         self.stream = SCStream(filter: contentFilter, configuration: streamConfig, delegate: self)
         try await setupEncoder()
         try await setupStream()
@@ -170,12 +162,6 @@ final class StreamController: NSObject, SCStreamOutput, SCStreamDelegate, @unche
     func sendDistortion(k1: Float, k2: Float) async {
         guard isStreaming else { return }
         let packet = USBPacket.distortionPacket(k1: k1, k2: k2, sequenceNumber: UInt32(frameCount))
-        await usbClient.send(packet.data)
-    }
-
-    func sendDeadband(mode: DeadbandMode) async {
-        guard isStreaming else { return }
-        let packet = USBPacket.deadbandPacket(mode: mode, sequenceNumber: UInt32(frameCount))
         await usbClient.send(packet.data)
     }
 

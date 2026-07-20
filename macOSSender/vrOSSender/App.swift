@@ -154,7 +154,6 @@ final class StreamManager: ObservableObject {
 
     @Published var distortionK1: Float = 0.2
     @Published var distortionK2: Float = 2.0
-    @Published var deadbandMode: DeadbandMode = .off
 
     @Published var iproxyState: IproxyState = .checking
     @Published var isInstalling = false
@@ -255,7 +254,6 @@ final class StreamManager: ObservableObject {
             await controller?.startStreaming()
             isStreaming = true
             sendDistortion()
-            sendDeadband()
             startFrameCounter()
         } catch {
             lastError = error.localizedDescription
@@ -282,10 +280,6 @@ final class StreamManager: ObservableObject {
 
     func sendDistortion() {
         Task { await controller?.sendDistortion(k1: distortionK1, k2: distortionK2) }
-    }
-
-    func sendDeadband() {
-        Task { await controller?.sendDeadband(mode: deadbandMode) }
     }
 
     private func findIproxy() -> String? {
