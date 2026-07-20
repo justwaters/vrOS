@@ -5,6 +5,18 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
+            Section("Head Tracking Deadband") {
+                Picker("Mode", selection: $streamManager.deadbandMode) {
+                    ForEach(DeadbandMode.allCases, id: \.self) { mode in
+                        Text(mode.label).tag(mode)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .onChange(of: streamManager.deadbandMode) { _ in
+                    streamManager.sendDeadband()
+                }
+            }
+
             Section("Barrel Distortion") {
                 HStack {
                     Text("k1:")
@@ -25,6 +37,6 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 300, height: 180)
+        .frame(width: 300, height: 260)
     }
 }
