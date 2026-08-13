@@ -80,7 +80,7 @@
 		F001F001F001F001F001F006 /* metal_distortion_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = metal_distortion_renderer.mm; path = "../cardboard-sdk/sdk/rendering/ios/metal_distortion_renderer.mm"; sourceTree = SOURCE_ROOT; };
 		F001F001F001F001F001F007 /* is_initialized.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = is_initialized.cc; path = "../cardboard-sdk/sdk/util/is_initialized.cc"; sourceTree = SOURCE_ROOT; };
 		F001F001F001F001F001F008 /* cardboard_v1.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = cardboard_v1.cc; path = "../cardboard-sdk/sdk/qrcode/cardboard_v1/cardboard_v1.cc"; sourceTree = SOURCE_ROOT; };
-		F001F001F001F001F001F00A /* screen_params.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = screen_params.mm; path = "../cardboard-sdk/sdk/screen_params/ios/screen_params.mm"; sourceTree = SOURCE_ROOT; };
+		F001F001F001F001F001F00A /* screen_params.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = screen_params.mm; sourceTree = "<group>"; };
 		F001F001F001F001F001F00B /* sdk_bundle_finder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = sdk_bundle_finder.mm; path = "../cardboard-sdk/sdk/screen_params/ios/sdk_bundle_finder.mm"; sourceTree = SOURCE_ROOT; };
 
 		F3C4D5E6F7A8B9C0D1E2F3C4D5E6F7 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -135,7 +135,6 @@
 				F001F001F001F001F001F006 /* metal_distortion_renderer.mm */,
 				F001F001F001F001F001F007 /* is_initialized.cc */,
 				F001F001F001F001F001F008 /* cardboard_v1.cc */,
-				F001F001F001F001F001F00A /* screen_params.mm */,
 				F001F001F001F001F001F00B /* sdk_bundle_finder.mm */,
 				F3C4D5E6F7A8B9C0D1E2F3C4D5E6F7 /* CoreMotion.framework */,
 			);
@@ -206,6 +205,7 @@
 			children = (
 				F001F001F001F001F001F001 /* CardboardSDKManager.h */,
 				F001F001F001F001F001F002 /* CardboardSDKManager.mm */,
+				F001F001F001F001F001F00A /* screen_params.mm */,
 			);
 			path = Cardboard;
 			sourceTree = "<group>";
