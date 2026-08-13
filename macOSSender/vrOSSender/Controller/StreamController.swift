@@ -7,8 +7,8 @@ import OSLog
 
 private let logger = Logger(subsystem: "com.vros.sender", category: "StreamController")
 
-final class StreamController: NSObject, SCStreamOutput, @unchecked Sendable {
-    private let stream: SCStream
+final class StreamController: NSObject, SCStreamOutput, SCStreamDelegate, @unchecked Sendable {
+    private var stream: SCStream!
     private let encoder: VideoEncoder
     private let usbClient: USBClient
     private let captureQueue = DispatchQueue(label: "com.vros.capture", qos: .userInteractive)
@@ -32,13 +32,13 @@ final class StreamController: NSObject, SCStreamOutput, @unchecked Sendable {
         streamConfig.showsCursor = true
         streamConfig.capturesAudio = false
 
-        self.stream = SCStream(filter: contentFilter, configuration: streamConfig, delegate: nil)
         self.encoder = VideoEncoder(configuration: configuration.encoderConfiguration)
         self.usbClient = USBClient(port: configuration.usbPort)
         self.frameRate = configuration.frameRate
 
         super.init()
 
+        self.stream = SCStream(filter: contentFilter, configuration: streamConfig, delegate: self)
         try await setupEncoder()
         try await setupStream()
         try await usbClient.start()
@@ -122,6 +122,13 @@ final class StreamController: NSObject, SCStreamOutput, @unchecked Sendable {
         await encoder.stop()
         await usbClient.stop()
         logger.info("Stopped streaming")
+    }
+
+    nonisolated func stream(_ stream: SCStream, didStopWithError error: Error) {
+        logger.error("Stream stopped with error: \(error)")
+        Task { @MainActor in
+            // The caller (StreamManager) should handle cleanup via stopStreaming
+        }
     }
 
     nonisolated func stream(_ stream: SCStream, didOutputSampleBuffer sampleBuffer: CMSampleBuffer, of type: SCStreamOutputType) {

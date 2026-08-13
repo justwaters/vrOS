@@ -30,7 +30,6 @@ final class VideoDecoder: @unchecked Sendable {
 
     private let decodingQueue = DispatchQueue(label: "com.vros.decoding", qos: .userInteractive)
     private var pendingNALs: [Data] = []
-    private var pendingKeyFrame = false
     private var frameCount: Int64 = 0
 
     init(configuration: Configuration, frameCallback: @escaping @Sendable (DecodedFrame) async -> Void) {
@@ -56,7 +55,7 @@ final class VideoDecoder: @unchecked Sendable {
     private func handleConfigPacket(_ data: Data) async {
         logger.info("Config packet received: \(data.count) bytes. First 16: \(data.prefix(16).map { String(format: "%02x", $0) }.joined(separator: " "))")
         var offset = 0
-        while offset < data.count - 4 {
+        while offset + 5 <= data.count {
             if data[offset] == 0x00 && data[offset+1] == 0x00 && data[offset+2] == 0x00 && data[offset+3] == 0x01 {
                 let nalType = data[offset+4] & 0x1F
                 let nalStart = offset + 4
@@ -96,12 +95,10 @@ final class VideoDecoder: @unchecked Sendable {
     private func handleVideoPacket(_ packet: USBPacket) async {
         let isKeyFrame = packet.header.flags.contains(.isKeyFrame)
         if isKeyFrame {
-            // If not configured, try to extract SPS/PPS from this key frame
             if decompressionSession == nil {
                 await extractSPSPPS(from: packet.payload)
             }
             pendingNALs.removeAll()
-            pendingKeyFrame = true
         }
         pendingNALs.append(packet.payload)
 
@@ -114,7 +111,7 @@ final class VideoDecoder: @unchecked Sendable {
     private func extractSPSPPS(from data: Data) async {
         logger.info("Attempting self-config from payload size: \(data.count). First 16 bytes: \(data.prefix(16).map { String(format: "%02x", $0) }.joined(separator: " "))")
         var offset = 0
-        while offset < data.count - 4 {
+        while offset + 5 <= data.count {
             if data[offset] == 0x00 && data[offset+1] == 0x00 && data[offset+2] == 0x00 && data[offset+3] == 0x01 {
                 let nalType = data[offset+4] & 0x1F
                 logger.debug("Found NAL unit at offset \(offset), type: \(nalType)")

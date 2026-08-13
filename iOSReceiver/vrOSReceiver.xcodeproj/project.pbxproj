@@ -7,26 +7,91 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C2C418E058742F9B9AFBEDB /* lowpass_filter.cc in Sources */ = {isa = PBXBuildFile; fileRef = 70BFF5E86B234513B2DA000C /* lowpass_filter.cc */; };
+		1384E30B8B7141938E79C1B8 /* device_gyroscope_sensor.mm in Sources */ = {isa = PBXBuildFile; fileRef = D922249C4A7D4B47A97BDC13 /* device_gyroscope_sensor.mm */; };
+		16A293DADE2C420B871E2F59 /* gyroscope_bias_estimator.cc in Sources */ = {isa = PBXBuildFile; fileRef = F6ADB8B7DB144480A2273301 /* gyroscope_bias_estimator.cc */; };
 		16A6351AD3FAD026E6A1CED7 /* USBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9641C8D2700B0E524B2B05F /* USBClient.swift */; };
+		182AA01CE79E4D61865E5B3C /* vrOSReceiver-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = CF45020AA5D14219A9393185 /* vrOSReceiver-Bridging-Header.h */; };
+		1E6D9FE38BDC43AC8A15F8A3 /* median_filter.cc in Sources */ = {isa = PBXBuildFile; fileRef = FCBBF46728474D20A4501E9F /* median_filter.cc */; };
+		243D7B140A9742A1B4E0919F /* sensor_event_producer.mm in Sources */ = {isa = PBXBuildFile; fileRef = AC2C94FBF58C46AAAEF517B1 /* sensor_event_producer.mm */; };
+		35DF71D344FC44E49B3B15DA /* matrix_3x3.cc in Sources */ = {isa = PBXBuildFile; fileRef = 306E4EEA39644B3C8FD89461 /* matrix_3x3.cc */; };
+		3C7D715ADB964B7FAF23A5C6 /* vectorutils.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6D6FEDFA80F74AA392671324 /* vectorutils.cc */; };
+		4335F75256F94AAA8D837E2C /* CardboardManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 67E3607494274AFAAA259C59 /* CardboardManager.mm */; };
+		4AC8CDA669B444778055367D /* head_tracker.cc in Sources */ = {isa = PBXBuildFile; fileRef = C3FCFF904050419D9DEF8515 /* head_tracker.cc */; };
+		5253CB00EAC84F219CAB8D85 /* matrix_4x4.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A83896E6AFF4EEB9EDC881C /* matrix_4x4.cc */; };
+		67C2B89ED554464CAA81EB1E /* sensor_helper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 204B72436BCE4321AAF57095 /* sensor_helper.mm */; };
+		7DE84483E05B4A58B48ED3F4 /* device_accelerometer_sensor.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDB2A28B63D74EE2B8A61650 /* device_accelerometer_sensor.mm */; };
 		8831B87BCDDDE65DB85AC79D /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B2289297FFA6B3E3B1A14F /* MetalRenderer.swift */; };
+		97AE696A66DA418BA098587E /* mean_filter.cc in Sources */ = {isa = PBXBuildFile; fileRef = 776D4F1FFBC8450C92C48D97 /* mean_filter.cc */; };
 		A4A74AC2C4E0D118E38E9D0C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7B83FACABA683AD1A85C27 /* ContentView.swift */; };
+		A763494D43C740C8A84F72D4 /* neck_model.cc in Sources */ = {isa = PBXBuildFile; fileRef = C95D528287634678AD29A4AB /* neck_model.cc */; };
 		A93957AAD78C244B8A6B79F8 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6058DC861B44C94E672E1239 /* App.swift */; };
-		C3FF7AFA8C956654F57268E9 /* VideoDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2287DDC26399E2796820D35 /* VideoDecoder.swift */; };
-		D79E611D41DBE4E9C7DD69EE /* USBPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E1A8EB59436992EEF34DA7 /* USBPacket.swift */; };
-		F4A5A2AC01FFC4676E408795 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 31BE30C360EB1E453552CB5F /* Shaders.metal */; };
+
 		B1A2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets */; };
+		BB174E9EC2EA485AB226D798 /* sensor_fusion_ekf.cc in Sources */ = {isa = PBXBuildFile; fileRef = 42E23DE0B2434A57B1862B9B /* sensor_fusion_ekf.cc */; };
+		C3FF7AFA8C956654F57268E9 /* VideoDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2287DDC26399E2796820D35 /* VideoDecoder.swift */; };
+		C7DD3F8A22924FB88CF65397 /* matrixutils.cc in Sources */ = {isa = PBXBuildFile; fileRef = E023759A2FAF4BE0AF190A96 /* matrixutils.cc */; };
+		D001D001D001D001D001D001 /* CardboardSDKManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F002 /* CardboardSDKManager.mm */; };
+		D001D001D001D001D001D002 /* lens_distortion.cc in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F003 /* lens_distortion.cc */; };
+		D001D001D001D001D001D003 /* distortion_mesh.cc in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F004 /* distortion_mesh.cc */; };
+		D001D001D001D001D001D004 /* polynomial_radial_distortion.cc in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F005 /* polynomial_radial_distortion.cc */; };
+		D001D001D001D001D001D005 /* metal_distortion_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F006 /* metal_distortion_renderer.mm */; };
+		D001D001D001D001D001D006 /* is_initialized.cc in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F007 /* is_initialized.cc */; };
+		D001D001D001D001D001D007 /* cardboard_v1.cc in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F008 /* cardboard_v1.cc */; };
+		D001D001D001D001D001D009 /* screen_params.mm in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F00A /* screen_params.mm */; };
+		D001D001D001D001D001D00A /* sdk_bundle_finder.mm in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F00B /* sdk_bundle_finder.mm */; };
+		D79E611D41DBE4E9C7DD69EE /* USBPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E1A8EB59436992EEF34DA7 /* USBPacket.swift */; };
+		DA38C90764F042B78F0EC986 /* CardboardManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 50B4E1BCE29E4737821978DF /* CardboardManager.h */; };
+		EFB0967CE6B0414EBBD12A8D /* rotation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9265CC6251F94193872689B6 /* rotation.cc */; };
+		F2C3D4E5F6A7B8C9D0E1F2C3D4E5F6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C4D5E6F7A8B9C0D1E2F3C4D5E6F7 /* CoreMotion.framework */; };
+		F4A5A2AC01FFC4676E408795 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 31BE30C360EB1E453552CB5F /* Shaders.metal */; };
+		SDKB1C0DE0001C0DE0001C0DE /* sdk.bundle in Resources */ = {isa = PBXBuildFile; fileRef = SDKB2C0DE0002C0DE0002C0DE /* sdk.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		204B72436BCE4321AAF57095 /* sensor_helper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = sensor_helper.mm; path = "../cardboard-sdk/sdk/sensors/ios/sensor_helper.mm"; sourceTree = SOURCE_ROOT; };
+		306E4EEA39644B3C8FD89461 /* matrix_3x3.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = matrix_3x3.cc; path = "../cardboard-sdk/sdk/util/matrix_3x3.cc"; sourceTree = SOURCE_ROOT; };
 		31BE30C360EB1E453552CB5F /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		42E23DE0B2434A57B1862B9B /* sensor_fusion_ekf.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = sensor_fusion_ekf.cc; path = "../cardboard-sdk/sdk/sensors/sensor_fusion_ekf.cc"; sourceTree = SOURCE_ROOT; };
+		50B4E1BCE29E4737821978DF /* CardboardManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardboardManager.h; sourceTree = "<group>"; };
 		59B2289297FFA6B3E3B1A14F /* MetalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalRenderer.swift; sourceTree = "<group>"; };
 		6058DC861B44C94E672E1239 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		67E3607494274AFAAA259C59 /* CardboardManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CardboardManager.mm; sourceTree = "<group>"; };
+		6D6FEDFA80F74AA392671324 /* vectorutils.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = vectorutils.cc; path = "../cardboard-sdk/sdk/util/vectorutils.cc"; sourceTree = SOURCE_ROOT; };
+		70BFF5E86B234513B2DA000C /* lowpass_filter.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = lowpass_filter.cc; path = "../cardboard-sdk/sdk/sensors/lowpass_filter.cc"; sourceTree = SOURCE_ROOT; };
+		776D4F1FFBC8450C92C48D97 /* mean_filter.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mean_filter.cc; path = "../cardboard-sdk/sdk/sensors/mean_filter.cc"; sourceTree = SOURCE_ROOT; };
 		84E1A8EB59436992EEF34DA7 /* USBPacket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = USBPacket.swift; path = ../../Shared/USBPacket.swift; sourceTree = "<group>"; };
+		8A83896E6AFF4EEB9EDC881C /* matrix_4x4.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = matrix_4x4.cc; path = "../cardboard-sdk/sdk/util/matrix_4x4.cc"; sourceTree = SOURCE_ROOT; };
 		8F80F2029C71F997171C51A7 /* vrOSReceiver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vrOSReceiver.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2287DDC26399E2796820D35 /* VideoDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDecoder.swift; sourceTree = "<group>"; };
-		C9641C8D2700B0E524B2B05F /* USBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBClient.swift; sourceTree = "<group>"; };
-		EF7B83FACABA683AD1A85C27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9265CC6251F94193872689B6 /* rotation.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = rotation.cc; path = "../cardboard-sdk/sdk/util/rotation.cc"; sourceTree = SOURCE_ROOT; };
 		A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AC2C94FBF58C46AAAEF517B1 /* sensor_event_producer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = sensor_event_producer.mm; path = "../cardboard-sdk/sdk/sensors/ios/sensor_event_producer.mm"; sourceTree = SOURCE_ROOT; };
+
+		BDB2A28B63D74EE2B8A61650 /* device_accelerometer_sensor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = device_accelerometer_sensor.mm; path = "../cardboard-sdk/sdk/sensors/ios/device_accelerometer_sensor.mm"; sourceTree = SOURCE_ROOT; };
+		C2287DDC26399E2796820D35 /* VideoDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDecoder.swift; sourceTree = "<group>"; };
+		C3FCFF904050419D9DEF8515 /* head_tracker.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = head_tracker.cc; path = "../cardboard-sdk/sdk/head_tracker.cc"; sourceTree = SOURCE_ROOT; };
+		C95D528287634678AD29A4AB /* neck_model.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = neck_model.cc; path = "../cardboard-sdk/sdk/sensors/neck_model.cc"; sourceTree = SOURCE_ROOT; };
+		C9641C8D2700B0E524B2B05F /* USBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = USBClient.swift; sourceTree = "<group>"; };
+		CF45020AA5D14219A9393185 /* vrOSReceiver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "vrOSReceiver-Bridging-Header.h"; sourceTree = "<group>"; };
+		D922249C4A7D4B47A97BDC13 /* device_gyroscope_sensor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = device_gyroscope_sensor.mm; path = "../cardboard-sdk/sdk/sensors/ios/device_gyroscope_sensor.mm"; sourceTree = SOURCE_ROOT; };
+		E023759A2FAF4BE0AF190A96 /* matrixutils.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = matrixutils.cc; path = "../cardboard-sdk/sdk/util/matrixutils.cc"; sourceTree = SOURCE_ROOT; };
+		EF7B83FACABA683AD1A85C27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F001F001F001F001F001F001 /* CardboardSDKManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardboardSDKManager.h; sourceTree = "<group>"; };
+		F001F001F001F001F001F002 /* CardboardSDKManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CardboardSDKManager.mm; sourceTree = "<group>"; };
+		F001F001F001F001F001F003 /* lens_distortion.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = lens_distortion.cc; path = "../cardboard-sdk/sdk/lens_distortion.cc"; sourceTree = SOURCE_ROOT; };
+		F001F001F001F001F001F004 /* distortion_mesh.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = distortion_mesh.cc; path = "../cardboard-sdk/sdk/distortion_mesh.cc"; sourceTree = SOURCE_ROOT; };
+		F001F001F001F001F001F005 /* polynomial_radial_distortion.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = polynomial_radial_distortion.cc; path = "../cardboard-sdk/sdk/polynomial_radial_distortion.cc"; sourceTree = SOURCE_ROOT; };
+		F001F001F001F001F001F006 /* metal_distortion_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = metal_distortion_renderer.mm; path = "../cardboard-sdk/sdk/rendering/ios/metal_distortion_renderer.mm"; sourceTree = SOURCE_ROOT; };
+		F001F001F001F001F001F007 /* is_initialized.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = is_initialized.cc; path = "../cardboard-sdk/sdk/util/is_initialized.cc"; sourceTree = SOURCE_ROOT; };
+		F001F001F001F001F001F008 /* cardboard_v1.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = cardboard_v1.cc; path = "../cardboard-sdk/sdk/qrcode/cardboard_v1/cardboard_v1.cc"; sourceTree = SOURCE_ROOT; };
+		F001F001F001F001F001F00A /* screen_params.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = screen_params.mm; path = "../cardboard-sdk/sdk/screen_params/ios/screen_params.mm"; sourceTree = SOURCE_ROOT; };
+		F001F001F001F001F001F00B /* sdk_bundle_finder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = sdk_bundle_finder.mm; path = "../cardboard-sdk/sdk/screen_params/ios/sdk_bundle_finder.mm"; sourceTree = SOURCE_ROOT; };
+
+		F3C4D5E6F7A8B9C0D1E2F3C4D5E6F7 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		F6ADB8B7DB144480A2273301 /* gyroscope_bias_estimator.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = gyroscope_bias_estimator.cc; path = "../cardboard-sdk/sdk/sensors/gyroscope_bias_estimator.cc"; sourceTree = SOURCE_ROOT; };
+		FCBBF46728474D20A4501E9F /* median_filter.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = median_filter.cc; path = "../cardboard-sdk/sdk/sensors/median_filter.cc"; sourceTree = SOURCE_ROOT; };
+
+		SDKB2C0DE0002C0DE0002C0DE /* sdk.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = sdk.bundle; path = "../cardboard-sdk/sdk/qrcode/ios/sdk.bundle"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2C3D4E5F6A7B8C9D0E1F2C3D4E5F6 /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +112,38 @@
 				84E1A8EB59436992EEF34DA7 /* USBPacket.swift */,
 			);
 			name = Shared;
+			sourceTree = "<group>";
+		};
+		692814E1300B28C7004C3588 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				C3FCFF904050419D9DEF8515 /* head_tracker.cc */,
+				42E23DE0B2434A57B1862B9B /* sensor_fusion_ekf.cc */,
+				F6ADB8B7DB144480A2273301 /* gyroscope_bias_estimator.cc */,
+				70BFF5E86B234513B2DA000C /* lowpass_filter.cc */,
+				776D4F1FFBC8450C92C48D97 /* mean_filter.cc */,
+				FCBBF46728474D20A4501E9F /* median_filter.cc */,
+				C95D528287634678AD29A4AB /* neck_model.cc */,
+				BDB2A28B63D74EE2B8A61650 /* device_accelerometer_sensor.mm */,
+				D922249C4A7D4B47A97BDC13 /* device_gyroscope_sensor.mm */,
+				AC2C94FBF58C46AAAEF517B1 /* sensor_event_producer.mm */,
+				204B72436BCE4321AAF57095 /* sensor_helper.mm */,
+				9265CC6251F94193872689B6 /* rotation.cc */,
+				6D6FEDFA80F74AA392671324 /* vectorutils.cc */,
+				306E4EEA39644B3C8FD89461 /* matrix_3x3.cc */,
+				8A83896E6AFF4EEB9EDC881C /* matrix_4x4.cc */,
+				E023759A2FAF4BE0AF190A96 /* matrixutils.cc */,
+				F001F001F001F001F001F003 /* lens_distortion.cc */,
+				F001F001F001F001F001F004 /* distortion_mesh.cc */,
+				F001F001F001F001F001F005 /* polynomial_radial_distortion.cc */,
+				F001F001F001F001F001F006 /* metal_distortion_renderer.mm */,
+				F001F001F001F001F001F007 /* is_initialized.cc */,
+				F001F001F001F001F001F008 /* cardboard_v1.cc */,
+				F001F001F001F001F001F00A /* screen_params.mm */,
+				F001F001F001F001F001F00B /* sdk_bundle_finder.mm */,
+				F3C4D5E6F7A8B9C0D1E2F3C4D5E6F7 /* CoreMotion.framework */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		77FC5E5F65879949490076AC /* Networking */ = {
@@ -61,6 +159,7 @@
 			children = (
 				8AAF3D06C0BFE19A9E13387F /* vrOSReceiver */,
 				82348BA366353D50C6C4AD81 /* Products */,
+				692814E1300B28C7004C3588 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,7 +175,10 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets */,
+				SDKB2C0DE0002C0DE0002C0DE /* sdk.bundle */,
 				6058DC861B44C94E672E1239 /* App.swift */,
+				CF45020AA5D14219A9393185 /* vrOSReceiver-Bridging-Header.h */,
+				F5A4B3C2D1E0F9A8B7C6D5E4F3A2B1C0 /* Cardboard */,
 				EF7B83FACABA683AD1A85C27 /* ContentView.swift */,
 				BE86E423CE7AF90E03EACCD4 /* Decoder */,
 				77FC5E5F65879949490076AC /* Networking */,
@@ -101,6 +203,17 @@
 				C2287DDC26399E2796820D35 /* VideoDecoder.swift */,
 			);
 			path = Decoder;
+			sourceTree = "<group>";
+		};
+		F5A4B3C2D1E0F9A8B7C6D5E4F3A2B1C0 /* Cardboard */ = {
+			isa = PBXGroup;
+			children = (
+				50B4E1BCE29E4737821978DF /* CardboardManager.h */,
+				67E3607494274AFAAA259C59 /* CardboardManager.mm */,
+				F001F001F001F001F001F001 /* CardboardSDKManager.h */,
+				F001F001F001F001F001F002 /* CardboardSDKManager.mm */,
+			);
+			path = Cardboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1A2C3D4E5F6A7B8C9D0E1F2A3B4C5D6 /* Assets.xcassets in Resources */,
+				SDKB1C0DE0001C0DE0001C0DE /* sdk.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +293,34 @@
 				8831B87BCDDDE65DB85AC79D /* MetalRenderer.swift in Sources */,
 				F4A5A2AC01FFC4676E408795 /* Shaders.metal in Sources */,
 				D79E611D41DBE4E9C7DD69EE /* USBPacket.swift in Sources */,
+				4AC8CDA669B444778055367D /* head_tracker.cc in Sources */,
+				BB174E9EC2EA485AB226D798 /* sensor_fusion_ekf.cc in Sources */,
+				16A293DADE2C420B871E2F59 /* gyroscope_bias_estimator.cc in Sources */,
+				0C2C418E058742F9B9AFBEDB /* lowpass_filter.cc in Sources */,
+				97AE696A66DA418BA098587E /* mean_filter.cc in Sources */,
+				1E6D9FE38BDC43AC8A15F8A3 /* median_filter.cc in Sources */,
+				A763494D43C740C8A84F72D4 /* neck_model.cc in Sources */,
+				7DE84483E05B4A58B48ED3F4 /* device_accelerometer_sensor.mm in Sources */,
+				1384E30B8B7141938E79C1B8 /* device_gyroscope_sensor.mm in Sources */,
+				243D7B140A9742A1B4E0919F /* sensor_event_producer.mm in Sources */,
+				67C2B89ED554464CAA81EB1E /* sensor_helper.mm in Sources */,
+				EFB0967CE6B0414EBBD12A8D /* rotation.cc in Sources */,
+				3C7D715ADB964B7FAF23A5C6 /* vectorutils.cc in Sources */,
+				35DF71D344FC44E49B3B15DA /* matrix_3x3.cc in Sources */,
+				5253CB00EAC84F219CAB8D85 /* matrix_4x4.cc in Sources */,
+				C7DD3F8A22924FB88CF65397 /* matrixutils.cc in Sources */,
+				4335F75256F94AAA8D837E2C /* CardboardManager.mm in Sources */,
+				DA38C90764F042B78F0EC986 /* CardboardManager.h in Sources */,
+				D001D001D001D001D001D001 /* CardboardSDKManager.mm in Sources */,
+				D001D001D001D001D001D002 /* lens_distortion.cc in Sources */,
+				D001D001D001D001D001D003 /* distortion_mesh.cc in Sources */,
+				D001D001D001D001D001D004 /* polynomial_radial_distortion.cc in Sources */,
+				D001D001D001D001D001D005 /* metal_distortion_renderer.mm in Sources */,
+				D001D001D001D001D001D006 /* is_initialized.cc in Sources */,
+				D001D001D001D001D001D007 /* cardboard_v1.cc in Sources */,
+				D001D001D001D001D001D009 /* screen_params.mm in Sources */,
+				D001D001D001D001D001D00A /* sdk_bundle_finder.mm in Sources */,
+				182AA01CE79E4D61865E5B3C /* vrOSReceiver-Bridging-Header.h in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +453,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/vrOSReceiver/Cardboard",
+					"$(SRCROOT)/../cardboard-sdk/sdk/include",
+					"$(SRCROOT)/../cardboard-sdk/sdk",
+				);
 				INFOPLIST_FILE = vrOSReceiver/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -319,9 +467,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vros.receiver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "vrOSReceiver/vrOSReceiver-Bridging-Header.h";
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -330,7 +483,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/vrOSReceiver/Cardboard",
+					"$(SRCROOT)/../cardboard-sdk/sdk/include",
+					"$(SRCROOT)/../cardboard-sdk/sdk",
+				);
 				INFOPLIST_FILE = vrOSReceiver/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -338,9 +497,14 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vros.receiver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "vrOSReceiver/vrOSReceiver-Bridging-Header.h";
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
