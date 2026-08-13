@@ -19,11 +19,6 @@ struct VROSSenderApp: App {
         }
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
-
-        Settings {
-            SettingsView()
-                .environmentObject(streamManager)
-        }
     }
 
     private func checkScreenRecordingPermission() {
@@ -152,9 +147,6 @@ final class StreamManager: ObservableObject {
     @Published var lastError: String?
     @Published var statusTextPublished = "Ready"
 
-    @Published var distortionK1: Float = 0.2
-    @Published var distortionK2: Float = 2.0
-
     @Published var iproxyState: IproxyState = .checking
     @Published var isInstalling = false
     @Published var installStatus = ""
@@ -253,7 +245,6 @@ final class StreamManager: ObservableObject {
             controller = try await StreamController(configuration: configuration)
             await controller?.startStreaming()
             isStreaming = true
-            sendDistortion()
             startFrameCounter()
         } catch {
             lastError = error.localizedDescription
@@ -276,10 +267,6 @@ final class StreamManager: ObservableObject {
         await stop()
         stopIproxy()
         iproxyState = findIproxy() != nil ? .ready : .notFound
-    }
-
-    func sendDistortion() {
-        Task { await controller?.sendDistortion(k1: distortionK1, k2: distortionK2) }
     }
 
     private func findIproxy() -> String? {

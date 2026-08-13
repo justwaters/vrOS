@@ -50,6 +50,16 @@ Stream your macOS desktop to an iPhone for viewing in a VR headset (Google Cardb
 
 ## Setup
 
+### 0. Fetch the Cardboard SDK submodule
+
+`cardboard-sdk/` is a git submodule (Google's Cardboard SDK). The iOS Receiver target compiles files directly out of it, so the build will fail with missing-file errors until it's populated:
+
+```bash
+git submodule update --init --recursive
+```
+
+Run this after cloning, and again after pulling if `cardboard-sdk` shows as changed.
+
 ### 1. Generate Xcode projects
 
 ```bash
