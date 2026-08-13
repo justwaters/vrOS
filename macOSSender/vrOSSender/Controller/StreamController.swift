@@ -159,12 +159,6 @@ final class StreamController: NSObject, SCStreamOutput, SCStreamDelegate, @unche
         frameCount
     }
 
-    func sendDistortion(k1: Float, k2: Float) async {
-        guard isStreaming else { return }
-        let packet = USBPacket.distortionPacket(k1: k1, k2: k2, sequenceNumber: UInt32(frameCount))
-        await usbClient.send(packet.data)
-    }
-
     enum StreamError: Error, LocalizedError {
         case noDisplayFound
         case streamSetupFailed(Error)

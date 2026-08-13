@@ -14,6 +14,8 @@ Full architecture, data flow, and the wire protocol (30-byte header, packet type
 
 ## Build
 
+`cardboard-sdk/` is a git submodule — run `git submodule update --init --recursive` after cloning or pulling, or the iOS Receiver target fails to build with missing-file errors (it compiles files directly out of `../cardboard-sdk/sdk/...`).
+
 There are no shared Xcode schemes committed to the repo (`xcschememanagement.plist` and `xcuserdata` are gitignored), so `xcodebuild -scheme ...` will fail with "scheme not found" until the project has been opened once in Xcode (which autogenerates the scheme). If building headlessly before that, use `-target` instead of `-scheme`:
 
 ```bash
@@ -36,11 +38,11 @@ There is no test target in either project and no lint config — don't invent te
 
 ## Xcode project files are hand-maintained — do not regenerate
 
-`setup_xcode_projects.sh` (and the `create_macos_project.py` / `create_ios_project.py` it writes) predates the current project structure: it emits a minimal `project.pbxproj` listing only the original handful of source files, with no Cardboard SDK references, no `Cardboard/` group, no `SettingsView.swift`, no header/library search paths. Running it now would **overwrite both `.pbxproj` files and silently drop the entire Cardboard integration** (head tracking, distortion rendering — see git history: "Cardboard SDK integration"). Treat the script as historical/stale. Add new files to the existing `.xcodeproj` via Xcode (or careful direct `.pbxproj` edits), never by rerunning the generator.
+`setup_xcode_projects.sh` (and the `create_macos_project.py` / `create_ios_project.py` it writes) predates the current project structure: it emits a minimal `project.pbxproj` listing only the original handful of source files, with no Cardboard SDK references, no `Cardboard/` group, no header/library search paths. Running it now would **overwrite both `.pbxproj` files and silently drop the entire Cardboard integration** (head tracking, distortion rendering — see git history: "Cardboard SDK integration"). Treat the script as historical/stale. Add new files to the existing `.xcodeproj` via Xcode (or careful direct `.pbxproj` edits), never by rerunning the generator.
 
 ## Cardboard SDK integration (iOSReceiver)
 
-`cardboard-sdk/` at the repo root is Google's Cardboard SDK, vendored as source (not a prebuilt framework or CocoaPod, despite the `Podfile` inside `cardboard-sdk/` — that Podfile belongs to the upstream project's own sample apps, not to vrOSReceiver). The iOS Receiver target compiles a hand-picked set of Cardboard `.cc`/`.mm` files directly (see `PBXFileReference` entries pointing at `../cardboard-sdk/sdk/...` in `iOSReceiver/vrOSReceiver.xcodeproj/project.pbxproj`) — sensor fusion, head tracker, lens/distortion math, matrix utils, and the iOS-specific sensor + Metal distortion renderer files. `HEADER_SEARCH_PATHS` adds `vrOSReceiver/Cardboard`, `../cardboard-sdk/sdk/include`, and `../cardboard-sdk/sdk`.
+`cardboard-sdk/` at the repo root is a git submodule pointing at Google's Cardboard SDK (`googlevr/cardboard`), compiled from source (not a prebuilt framework or CocoaPod, despite the `Podfile` inside `cardboard-sdk/` — that Podfile belongs to the upstream project's own sample apps, not to vrOSReceiver). The iOS Receiver target compiles a hand-picked set of Cardboard `.cc`/`.mm` files directly (see `PBXFileReference` entries pointing at `../cardboard-sdk/sdk/...` in `iOSReceiver/vrOSReceiver.xcodeproj/project.pbxproj`) — sensor fusion, head tracker, lens/distortion math, matrix utils, and the iOS-specific sensor + Metal distortion renderer files. `HEADER_SEARCH_PATHS` adds `vrOSReceiver/Cardboard`, `../cardboard-sdk/sdk/include`, and `../cardboard-sdk/sdk`.
 
 The Swift-facing surface is `iOSReceiver/vrOSReceiver/Cardboard/CardboardSDKManager.{h,mm}`, bridged into Swift via `vrOSReceiver-Bridging-Header.h`. It owns head tracking (`headOrientation`/`headPosition`, `recenter`), per-eye projection/view matrices, and compositing left/right eye textures to the display with barrel distortion (`renderEyesToDisplayWithCommandEncoder:...`). `MetalRenderer.swift` renders each eye to an offscreen texture and hands both to `CardboardSDKManager` for final distortion + compositing — it does not do the distortion math itself.
 

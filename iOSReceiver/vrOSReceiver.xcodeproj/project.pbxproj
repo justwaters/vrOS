@@ -16,7 +16,6 @@
 		243D7B140A9742A1B4E0919F /* sensor_event_producer.mm in Sources */ = {isa = PBXBuildFile; fileRef = AC2C94FBF58C46AAAEF517B1 /* sensor_event_producer.mm */; };
 		35DF71D344FC44E49B3B15DA /* matrix_3x3.cc in Sources */ = {isa = PBXBuildFile; fileRef = 306E4EEA39644B3C8FD89461 /* matrix_3x3.cc */; };
 		3C7D715ADB964B7FAF23A5C6 /* vectorutils.cc in Sources */ = {isa = PBXBuildFile; fileRef = 6D6FEDFA80F74AA392671324 /* vectorutils.cc */; };
-		4335F75256F94AAA8D837E2C /* CardboardManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 67E3607494274AFAAA259C59 /* CardboardManager.mm */; };
 		4AC8CDA669B444778055367D /* head_tracker.cc in Sources */ = {isa = PBXBuildFile; fileRef = C3FCFF904050419D9DEF8515 /* head_tracker.cc */; };
 		5253CB00EAC84F219CAB8D85 /* matrix_4x4.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A83896E6AFF4EEB9EDC881C /* matrix_4x4.cc */; };
 		67C2B89ED554464CAA81EB1E /* sensor_helper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 204B72436BCE4321AAF57095 /* sensor_helper.mm */; };
@@ -41,7 +40,6 @@
 		D001D001D001D001D001D009 /* screen_params.mm in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F00A /* screen_params.mm */; };
 		D001D001D001D001D001D00A /* sdk_bundle_finder.mm in Sources */ = {isa = PBXBuildFile; fileRef = F001F001F001F001F001F00B /* sdk_bundle_finder.mm */; };
 		D79E611D41DBE4E9C7DD69EE /* USBPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E1A8EB59436992EEF34DA7 /* USBPacket.swift */; };
-		DA38C90764F042B78F0EC986 /* CardboardManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 50B4E1BCE29E4737821978DF /* CardboardManager.h */; };
 		EFB0967CE6B0414EBBD12A8D /* rotation.cc in Sources */ = {isa = PBXBuildFile; fileRef = 9265CC6251F94193872689B6 /* rotation.cc */; };
 		F2C3D4E5F6A7B8C9D0E1F2C3D4E5F6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C4D5E6F7A8B9C0D1E2F3C4D5E6F7 /* CoreMotion.framework */; };
 		F4A5A2AC01FFC4676E408795 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 31BE30C360EB1E453552CB5F /* Shaders.metal */; };
@@ -53,10 +51,8 @@
 		306E4EEA39644B3C8FD89461 /* matrix_3x3.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = matrix_3x3.cc; path = "../cardboard-sdk/sdk/util/matrix_3x3.cc"; sourceTree = SOURCE_ROOT; };
 		31BE30C360EB1E453552CB5F /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		42E23DE0B2434A57B1862B9B /* sensor_fusion_ekf.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = sensor_fusion_ekf.cc; path = "../cardboard-sdk/sdk/sensors/sensor_fusion_ekf.cc"; sourceTree = SOURCE_ROOT; };
-		50B4E1BCE29E4737821978DF /* CardboardManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardboardManager.h; sourceTree = "<group>"; };
 		59B2289297FFA6B3E3B1A14F /* MetalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalRenderer.swift; sourceTree = "<group>"; };
 		6058DC861B44C94E672E1239 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		67E3607494274AFAAA259C59 /* CardboardManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CardboardManager.mm; sourceTree = "<group>"; };
 		6D6FEDFA80F74AA392671324 /* vectorutils.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = vectorutils.cc; path = "../cardboard-sdk/sdk/util/vectorutils.cc"; sourceTree = SOURCE_ROOT; };
 		70BFF5E86B234513B2DA000C /* lowpass_filter.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = lowpass_filter.cc; path = "../cardboard-sdk/sdk/sensors/lowpass_filter.cc"; sourceTree = SOURCE_ROOT; };
 		776D4F1FFBC8450C92C48D97 /* mean_filter.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mean_filter.cc; path = "../cardboard-sdk/sdk/sensors/mean_filter.cc"; sourceTree = SOURCE_ROOT; };
@@ -208,8 +204,6 @@
 		F5A4B3C2D1E0F9A8B7C6D5E4F3A2B1C0 /* Cardboard */ = {
 			isa = PBXGroup;
 			children = (
-				50B4E1BCE29E4737821978DF /* CardboardManager.h */,
-				67E3607494274AFAAA259C59 /* CardboardManager.mm */,
 				F001F001F001F001F001F001 /* CardboardSDKManager.h */,
 				F001F001F001F001F001F002 /* CardboardSDKManager.mm */,
 			);
@@ -309,8 +303,6 @@
 				35DF71D344FC44E49B3B15DA /* matrix_3x3.cc in Sources */,
 				5253CB00EAC84F219CAB8D85 /* matrix_4x4.cc in Sources */,
 				C7DD3F8A22924FB88CF65397 /* matrixutils.cc in Sources */,
-				4335F75256F94AAA8D837E2C /* CardboardManager.mm in Sources */,
-				DA38C90764F042B78F0EC986 /* CardboardManager.h in Sources */,
 				D001D001D001D001D001D001 /* CardboardSDKManager.mm in Sources */,
 				D001D001D001D001D001D002 /* lens_distortion.cc in Sources */,
 				D001D001D001D001D001D003 /* distortion_mesh.cc in Sources */,

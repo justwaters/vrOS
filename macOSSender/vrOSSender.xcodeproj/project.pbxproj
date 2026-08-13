@@ -10,7 +10,6 @@
 		15AA9FF905EF2A4F9B472B4D /* StreamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46536AA5525F4D05C52024A /* StreamController.swift */; };
 		21D8D58008C62A699DE2988F /* USBServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539E23B59F408F0BCF56E4F4 /* USBServer.swift */; };
 		428B13BD918277F6BE80F462 /* USBPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7074B70252C617F8E68D22 /* USBPacket.swift */; };
-		A2B3C4D5E6F7A8B9C0D1E2F3A4B5C6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E6F7A8B9C0D1E2F3A4B5 /* SettingsView.swift */; };
 		A31C6D318844E62C102D59E8 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71232974A007DE841081A8F8 /* App.swift */; };
 		B71E30F83C809B80ADAE18A1 /* VideoEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE5F2FEBB4024993EBA0BC /* VideoEncoder.swift */; };
 		E1F2A3B4C5D6E7F8A9B0C1D2E3F4A5B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1D2E3F4A5B6C7D8E9F0A1B2C3D4E5F6 /* Assets.xcassets */; };
@@ -24,7 +23,6 @@
 		9A74FF122FA6EE84A73A159E /* vrOSSender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vrOSSender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D2E3F4A5B6C7D8E9F0A1B2C3D4E5F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C46536AA5525F4D05C52024A /* StreamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamController.swift; sourceTree = "<group>"; };
-		F1A2B3C4D5E6F7A8B9C0D1E2F3A4B5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +89,6 @@
 			children = (
 				C1D2E3F4A5B6C7D8E9F0A1B2C3D4E5F6 /* Assets.xcassets */,
 				71232974A007DE841081A8F8 /* App.swift */,
-				F1A2B3C4D5E6F7A8B9C0D1E2F3A4B5 /* SettingsView.swift */,
 				1FB069A12B16F6E90A4530D0 /* Controller */,
 				8D56A4FB0F548FEA54E0928A /* Encoder */,
 				2668315414A38B285592B02D /* Networking */,
@@ -171,7 +168,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A31C6D318844E62C102D59E8 /* App.swift in Sources */,
-				A2B3C4D5E6F7A8B9C0D1E2F3A4B5C6 /* SettingsView.swift in Sources */,
 				15AA9FF905EF2A4F9B472B4D /* StreamController.swift in Sources */,
 				B71E30F83C809B80ADAE18A1 /* VideoEncoder.swift in Sources */,
 				21D8D58008C62A699DE2988F /* USBServer.swift in Sources */,
