@@ -113,7 +113,7 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
 
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         cardboardManager.recenter()
-        calibrated = true
+        calibrated = false // Let the next frame compute the flat yaw reference
         logger.info("Recalibrated head tracking reference")
     }
 
@@ -175,31 +175,38 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
               let commandBuffer = commandQueue.makeCommandBuffer() else { return }
 
         cardboardManager.updatePose()
-        let headQuat = cardboardManager.headOrientation
+        
+        // 1. Get the raw tracking data (which defaults to Portrait orientation)
+        let rawQuat = cardboardManager.headOrientation
+        
+        // 2. Correct for Landscape orientation by rotating 90 degrees around the Z axis.
+        // NOTE: If pitch/roll move cleanly but in the wrong direction, change .pi / 2 to -.pi / 2
+        let landscapeCorrection = simd_quaternion(.pi / 2, simd_float3(0, 0, 1))
+        let headQuat = simd_mul(rawQuat, landscapeCorrection)
 
         if !calibrated {
-            cardboardManager.referenceOrientation = headQuat
+            // Get where the user is looking
+            let fwd = headQuat.act(simd_float3(0, 0, -1))
+            
+            // Flatten that vector onto the XZ (horizontal) plane
+            let flatFwd = simd_float3(fwd.x, 0, fwd.z)
+            
+            // Prevent math errors if the user is looking straight up or down
+            if simd_length(flatFwd) > 0.001 {
+                // Create a quaternion that ONLY rotates the Y-axis (Yaw)
+                cardboardManager.referenceOrientation = simd_quaternion(simd_float3(0, 0, -1), simd_normalize(flatFwd))
+            } else {
+                cardboardManager.referenceOrientation = simd_quatf(ix: 0, iy: 0, iz: 0, r: 1) // Fallback
+            }
+            
             calibrated = true
         }
 
-        let relativeQuat = simd_mul(headQuat, simd_inverse(cardboardManager.referenceOrientation))
+        // 3. Apply the yaw calibration offset to the corrected head pose
+        let relativeQuat = simd_mul(simd_inverse(cardboardManager.referenceOrientation), headQuat)
 
-        let fwd = relativeQuat.act(simd_float3(0, 0, -1))
-        let up = relativeQuat.act(simd_float3(0, 1, 0))
-        let axis = simd_normalize(simd_cross(fwd, simd_float3(0, 1, 0)))
-        let headRotation: simd_float4x4
-        if simd_length(axis) > 0.001 {
-            let perp = simd_dot(up, axis) * axis
-            let newUp = simd_normalize(up - 2.0 * perp)
-            let right = simd_normalize(simd_cross(fwd, newUp))
-            headRotation = simd_matrix(
-                simd_float4(right.x, right.y, right.z, 0),
-                simd_float4(newUp.x, newUp.y, newUp.z, 0),
-                simd_float4(-fwd.x, -fwd.y, -fwd.z, 0),
-                simd_float4(0, 0, 0, 1))
-        } else {
-            headRotation = float4x4(relativeQuat)
-        }
+        // 4. Convert directly to matrix (no cross-product filtering required)
+        let headRotation = matrix_float4x4(relativeQuat)
 
         let w = Int(lastViewportSize.width)
         let h = Int(lastViewportSize.height)
