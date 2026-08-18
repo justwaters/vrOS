@@ -168,11 +168,19 @@
     std::array<float, 4> orientation;
 
     int64_t timestamp = clock_gettime_nsec_np(CLOCK_UPTIME_RAW);
-    _tracker->GetPose(timestamp, kLandscapeRight, position, orientation);
+    // The interface orientation is locked to UIInterfaceOrientationLandscapeRight
+    // (see Info.plist), but Cardboard's viewport-orientation enum is inverted
+    // relative to iOS's naming — Google's own hellocardboard-ios sample locks to
+    // LandscapeRight and passes kLandscapeLeft here (see HelloCardboardRenderer.mm).
+    _tracker->GetPose(timestamp, kLandscapeLeft, position, orientation);
 
     _lastPosition = simd_make_float3(position[0], position[1], position[2]);
-    _lastOrientation = simd_quaternion(orientation[1], orientation[2],
-                                       orientation[3], orientation[0]);
+    // Cardboard's Rotation::QuaternionType stores components as (x, y, z, w)
+    // (see head_tracker.cc's reference quaternions, e.g. a 90 degree Z rotation
+    // is QuaternionType(0, 0, 0.7071, 0.7071)), matching simd_quaternion's
+    // (ix, iy, iz, r) parameter order directly -- no reordering needed.
+    _lastOrientation = simd_quaternion(orientation[0], orientation[1],
+                                       orientation[2], orientation[3]);
 }
 
 #pragma mark - Private

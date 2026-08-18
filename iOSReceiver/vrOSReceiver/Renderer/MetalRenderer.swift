@@ -175,22 +175,27 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
               let commandBuffer = commandQueue.makeCommandBuffer() else { return }
 
         cardboardManager.updatePose()
-        
-        // 1. Get the raw tracking data (which defaults to Portrait orientation)
-        let rawQuat = cardboardManager.headOrientation
-        
-        // 2. Correct for Landscape orientation by rotating 90 degrees around the Z axis.
-        // NOTE: If pitch/roll move cleanly but in the wrong direction, change .pi / 2 to -.pi / 2
-        let landscapeCorrection = simd_quaternion(.pi / 2, simd_float3(0, 0, 1))
-        let headQuat = simd_mul(rawQuat, landscapeCorrection)
+
+        // CardboardSDKManager passes kLandscapeLeft to GetPose to match the
+        // UIInterfaceOrientationLandscapeRight lock in Info.plist (Cardboard's
+        // viewport-orientation enum is inverted relative to iOS's naming — see
+        // the comment in CardboardSDKManager.mm). That fixes the static
+        // orientation, but the SDK's yaw (rotation about Y) still comes out
+        // sign-inverted for this viewport/orientation combination -- verified
+        // empirically (turning right visibly moved the world-locked screen
+        // right instead of left, both with and without calibration applied).
+        // Negating the quaternion's Y component corrects it.
+        let rawHeadQuat = cardboardManager.headOrientation
+        let headQuat = simd_quatf(ix: rawHeadQuat.imag.x, iy: -rawHeadQuat.imag.y,
+                                   iz: rawHeadQuat.imag.z, r: rawHeadQuat.real)
 
         if !calibrated {
             // Get where the user is looking
             let fwd = headQuat.act(simd_float3(0, 0, -1))
-            
+
             // Flatten that vector onto the XZ (horizontal) plane
             let flatFwd = simd_float3(fwd.x, 0, fwd.z)
-            
+
             // Prevent math errors if the user is looking straight up or down
             if simd_length(flatFwd) > 0.001 {
                 // Create a quaternion that ONLY rotates the Y-axis (Yaw)
@@ -198,12 +203,14 @@ final class MetalRenderer: NSObject, MTKViewDelegate {
             } else {
                 cardboardManager.referenceOrientation = simd_quatf(ix: 0, iy: 0, iz: 0, r: 1) // Fallback
             }
-            
+
             calibrated = true
         }
 
-        // 3. Apply the yaw calibration offset to the corrected head pose
-        let relativeQuat = simd_mul(simd_inverse(cardboardManager.referenceOrientation), headQuat)
+        // 3. Apply the yaw calibration offset to the corrected head pose.
+        // CardboardSDKManager.h documents this as headOrientation * inverse(referenceOrientation) --
+        // quaternion composition isn't commutative, so the multiplication order matters.
+        let relativeQuat = simd_mul(headQuat, simd_inverse(cardboardManager.referenceOrientation))
 
         // 4. Convert directly to matrix (no cross-product filtering required)
         let headRotation = matrix_float4x4(relativeQuat)

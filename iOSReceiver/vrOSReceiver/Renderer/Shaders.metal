@@ -38,7 +38,11 @@ vertex VertexOut vertexShader(
     float3 worldPos = float3(pos.x * halfW, pos.y * halfH,
                              -uniforms.screenDistance);
 
-    float4 headPos = uniforms.headRotation * float4(worldPos, 1.0);
+    // headRotation is the head's orientation IN world space. To render a
+    // world-fixed quad from the head's point of view we need the inverse
+    // (transpose, since this is a pure rotation) so the quad counter-rotates
+    // as the head turns and stays world-locked instead of following the gaze.
+    float4 headPos = transpose(uniforms.headRotation) * float4(worldPos, 1.0);
     float4 eyePos = uniforms.eyeFromHead * headPos;
     float4 clipPos = uniforms.projectionMatrix * eyePos;
 

@@ -5,5 +5,9 @@
 *.xcuserstate
 xcschememanagement.plist
 
+# Local build products (xcodebuild -destination output)
+/iOSReceiver/build/
+/macOSSender/build/
+
 # Backups
 *.bak
