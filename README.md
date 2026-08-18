@@ -163,3 +163,7 @@ vrOS/
 - ⬜ Key frame request / error recovery
 - ⬜ Display selection UI (currently primary display only)
 - ⬜ Unit tests
+
+## Releases
+
+vrOS uses one codename per major version (e.g. all `v1.x.x` releases are **vrOS Solitude**); a new major version gets a new codename. See [`CHANGELOG.md`](CHANGELOG.md) for the full convention and version history, and the [Releases page](https://github.com/justwaters/vrOS/releases) for downloads/notes.

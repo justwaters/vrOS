@@ -51,3 +51,5 @@ QR-code viewer-profile scanning (`reloadWithEncodedDeviceParams:`) was implement
 ## Protocol/model changes touch both targets
 
 `Shared/USBPacket.swift` is not referenced by a shared build target — it's compiled independently into both `macOSSender` and `iOSReceiver`. If you change the packet format, header layout, or packet type enum, edit `Shared/USBPacket.swift` and verify both `.pbxproj` files still reference the single copy (they should — check `PBXFileReference`/`PBXBuildFile` entries for `USBPacket.swift` in each project) rather than a stale per-project copy.
+
+Both targets' `CFBundleShortVersionString` are kept in lockstep on every release — see the codename/version convention in `CHANGELOG.md`.
