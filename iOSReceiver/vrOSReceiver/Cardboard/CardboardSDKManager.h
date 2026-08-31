@@ -23,7 +23,10 @@ NS_SWIFT_SENDABLE
 @property (nonatomic, readonly) simd_float3 headPosition;
 
 // The orientation used as the "forward" reference. Set at startup and on recenter.
-// The renderer should compute: headRotation = headOrientation * inverse(referenceOrientation)
+// headOrientation is a world-to-head transform; referenceOrientation is the
+// head-to-world-ish yaw-only rotation computed by MetalRenderer.computeHeadRotation
+// (flattened from headOrientation's inverse at calibration time), so the renderer
+// composes: headRotation = headOrientation * referenceOrientation.
 @property (nonatomic) simd_quatf referenceOrientation;
 
 // Per-eye rendering info

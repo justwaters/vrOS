@@ -44,6 +44,8 @@
 		F2C3D4E5F6A7B8C9D0E1F2C3D4E5F6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3C4D5E6F7A8B9C0D1E2F3C4D5E6F7 /* CoreMotion.framework */; };
 		F4A5A2AC01FFC4676E408795 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 31BE30C360EB1E453552CB5F /* Shaders.metal */; };
 		SDKB1C0DE0001C0DE0001C0DE /* sdk.bundle in Resources */ = {isa = PBXBuildFile; fileRef = SDKB2C0DE0002C0DE0002C0DE /* sdk.bundle */; };
+		A1000000000000000000A008 /* UltrawideCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000A009 /* UltrawideCaptureManager.swift */; };
+		A1000000000000000000A003 /* PassthroughShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000A004 /* PassthroughShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +90,8 @@
 		FCBBF46728474D20A4501E9F /* median_filter.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = median_filter.cc; path = "../cardboard-sdk/sdk/sensors/median_filter.cc"; sourceTree = SOURCE_ROOT; };
 
 		SDKB2C0DE0002C0DE0002C0DE /* sdk.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = sdk.bundle; path = "../cardboard-sdk/sdk/qrcode/ios/sdk.bundle"; sourceTree = SOURCE_ROOT; };
+		A1000000000000000000A009 /* UltrawideCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltrawideCaptureManager.swift; sourceTree = "<group>"; };
+		A1000000000000000000A004 /* PassthroughShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PassthroughShaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +178,7 @@
 				6058DC861B44C94E672E1239 /* App.swift */,
 				CF45020AA5D14219A9393185 /* vrOSReceiver-Bridging-Header.h */,
 				F5A4B3C2D1E0F9A8B7C6D5E4F3A2B1C0 /* Cardboard */,
+				A1000000000000000000A005 /* ARKit */,
 				EF7B83FACABA683AD1A85C27 /* ContentView.swift */,
 				BE86E423CE7AF90E03EACCD4 /* Decoder */,
 				77FC5E5F65879949490076AC /* Networking */,
@@ -188,8 +193,17 @@
 			children = (
 				59B2289297FFA6B3E3B1A14F /* MetalRenderer.swift */,
 				31BE30C360EB1E453552CB5F /* Shaders.metal */,
+				A1000000000000000000A004 /* PassthroughShaders.metal */,
 			);
 			path = Renderer;
+			sourceTree = "<group>";
+		};
+		A1000000000000000000A005 /* ARKit */ = {
+			isa = PBXGroup;
+			children = (
+				A1000000000000000000A009 /* UltrawideCaptureManager.swift */,
+			);
+			path = ARKit;
 			sourceTree = "<group>";
 		};
 		BE86E423CE7AF90E03EACCD4 /* Decoder */ = {
@@ -286,6 +300,8 @@
 				16A6351AD3FAD026E6A1CED7 /* USBClient.swift in Sources */,
 				8831B87BCDDDE65DB85AC79D /* MetalRenderer.swift in Sources */,
 				F4A5A2AC01FFC4676E408795 /* Shaders.metal in Sources */,
+				A1000000000000000000A008 /* UltrawideCaptureManager.swift in Sources */,
+				A1000000000000000000A003 /* PassthroughShaders.metal in Sources */,
 				D79E611D41DBE4E9C7DD69EE /* USBPacket.swift in Sources */,
 				4AC8CDA669B444778055367D /* head_tracker.cc in Sources */,
 				BB174E9EC2EA485AB226D798 /* sensor_fusion_ekf.cc in Sources */,

@@ -40,6 +40,8 @@
 	</dict>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>vrOS Receiver uses local network for USB communication.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>vrOS uses the camera to show your surroundings for AR passthrough mode.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>external-accessory</string>

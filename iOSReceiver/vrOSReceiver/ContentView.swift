@@ -120,9 +120,35 @@ private struct HUDView: View {
 
             HUDCard(viewModel: viewModel)
                 .position(x: halfW / 2 + 10, y: 24)
+            ARToggleButton(renderer: viewModel.renderer)
+                .position(x: halfW / 2 + 10, y: 100)
 
             HUDCard(viewModel: viewModel)
                 .position(x: halfW + halfW / 2 + 10, y: 24)
+            ARToggleButton(renderer: viewModel.renderer)
+                .position(x: halfW + halfW / 2 + 10, y: 100)
+        }
+    }
+}
+
+/// VR/AR mode switch. Hidden entirely on devices with no usable rear camera,
+/// so VR keeps working unconditionally everywhere it already does.
+private struct ARToggleButton: View {
+    @ObservedObject var renderer: MetalRenderer
+
+    var body: some View {
+        if UltrawideCaptureManager.isSupported {
+            Button {
+                renderer.mode = renderer.mode == .vr ? .ar : .vr
+            } label: {
+                Label(renderer.mode == .vr ? "VR" : "AR", systemImage: renderer.mode == .vr ? "visionpro" : "arkit")
+                    .font(.caption2.weight(.semibold))
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 6)
+                    .background(.ultraThinMaterial, in: Capsule())
+            }
+            .buttonStyle(.plain)
+            .foregroundStyle(.white)
         }
     }
 }
