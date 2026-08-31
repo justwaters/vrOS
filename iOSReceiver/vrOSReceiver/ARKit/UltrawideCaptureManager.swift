@@ -35,17 +35,28 @@ final class UltrawideCaptureManager: NSObject, AVCaptureVideoDataOutputSampleBuf
     /// area is bounded by the format's HEIGHT, not its width. A fixed preset
     /// like .hd1920x1080 forces a 16:9 crop before we ever see the buffer,
     /// discarding vertical sensor area a taller (closer to the sensor's native
-    /// 4:3-ish shape) format would have kept. Picks the highest-resolution
-    /// format among reasonable (>=24fps) ones instead, ranked by height.
+    /// 4:3-ish shape) format would have kept.
+    ///
+    /// Frame rate matters more than resolution here: the render loop runs at
+    /// 60fps (driven by Cardboard's IMU-based head tracking), and a passthrough
+    /// format capped below that shows each camera frame for multiple render
+    /// frames -- during fast head turns that stale-background gap reads as
+    /// choppy even though the virtual content stays smooth (verified on-device:
+    /// turning the head at moderate-to-high speed made the real-world view
+    /// stutter). Rank 60fps-capable formats first, tallest among those; only
+    /// fall back to a lower frame rate if no 60fps format exists at all.
     private static func bestSquareFormat(for device: AVCaptureDevice) -> AVCaptureDevice.Format? {
-        device.formats
-            .filter { format in
-                format.videoSupportedFrameRateRanges.contains { $0.maxFrameRate >= 24 }
-            }
-            .max { a, b in
-                CMVideoFormatDescriptionGetDimensions(a.formatDescription).height
-                    < CMVideoFormatDescriptionGetDimensions(b.formatDescription).height
-            }
+        let candidates = device.formats.filter { format in
+            format.videoSupportedFrameRateRanges.contains { $0.maxFrameRate >= 24 }
+        }
+        let sixtyFps = candidates.filter { format in
+            format.videoSupportedFrameRateRanges.contains { $0.maxFrameRate >= 59 }
+        }
+        let pool = sixtyFps.isEmpty ? candidates : sixtyFps
+        return pool.max { a, b in
+            CMVideoFormatDescriptionGetDimensions(a.formatDescription).height
+                < CMVideoFormatDescriptionGetDimensions(b.formatDescription).height
+        }
     }
 
     func start() {
@@ -59,11 +70,18 @@ final class UltrawideCaptureManager: NSObject, AVCaptureVideoDataOutputSampleBuf
 
         if let format = Self.bestSquareFormat(for: device) {
             let dims = CMVideoFormatDescriptionGetDimensions(format.formatDescription)
+            let maxFrameRate = format.videoSupportedFrameRateRanges.map(\.maxFrameRate).max() ?? 30
             do {
                 try device.lockForConfiguration()
                 device.activeFormat = format
+                // AVFoundation doesn't always default to a format's fastest
+                // supported rate -- request it explicitly (see the format
+                // selection's frame-rate comment above).
+                let frameDuration = CMTimeMake(value: 1, timescale: Int32(maxFrameRate))
+                device.activeVideoMinFrameDuration = frameDuration
+                device.activeVideoMaxFrameDuration = frameDuration
                 device.unlockForConfiguration()
-                logger.info("Using camera: \(device.localizedName, privacy: .public) \(dims.width, privacy: .public)x\(dims.height, privacy: .public) hFOV=\(format.videoFieldOfView, privacy: .public)deg")
+                logger.info("Using camera: \(device.localizedName, privacy: .public) \(dims.width, privacy: .public)x\(dims.height, privacy: .public) @\(maxFrameRate, privacy: .public)fps hFOV=\(format.videoFieldOfView, privacy: .public)deg")
             } catch {
                 logger.error("Could not lock device for configuration: \(String(describing: error), privacy: .public)")
             }
